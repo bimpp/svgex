@@ -1,6 +1,3 @@
-[submodule "externals/svgpp"]
-	path = externals/svgpp
-	url = git@gitee.com:bimpp/svgpp.git
 [submodule "externals/rapidxml_ns"]
 	path = externals/rapidxml_ns
 	url = https://gitee.com/bimpp/rapidxml_ns.git
