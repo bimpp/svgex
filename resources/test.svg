@@ -1,0 +1,73 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1200px" height="900px" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+	<defs>
+		<pattern id="dinning-room" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse" >
+			<rect x="0" y="0" width="10" height="10" fill="rgb(192,192,192)" stroke-width="1" stroke="rgb(255,255,255)" />
+		</pattern>
+		<pattern id="kitchen" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse" >
+			<rect x="0" y="0" width="5" height="5" fill="rgb(255,64,64)" />
+		</pattern>
+		<pattern id="floating-window" x="0" y="0" width="10" height="5" patternUnits="userSpaceOnUse" >
+			<rect x="0" y="0" width="10" height="5" fill="rgb(255,255,128)" stroke-width="1" stroke="rgb(255,255,255)" />
+		</pattern>
+		<pattern id="unknown" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse" >
+			<rect x="0" y="0" width="10" height="10" fill="rgb(128,128,128)" />
+		</pattern>
+	</defs>
+	<path d="M811,448.501 811,103 690,103 690,205 690,103 419,103 419,281 164,281 164,361 122,361 122,726 418.835,726 418.835,584 418.835,448.501 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14'" />
+	<line x1="811" y1="448.501" x2="811" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'0','start':'811,448.501','end':'811,103','thickness':'8'}" />
+	<line x1="122" y1="726" x2="122" y2="361" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'1','start':'122,726','end':'122,361','thickness':'8'}" />
+	<line x1="418.835" y1="726" x2="418.835" y2="584" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'2','start':'418.835,726','end':'418.835,584','thickness':'8'}" />
+	<line x1="418.835" y1="584" x2="418.835" y2="448.501" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'3','start':'418.835,584','end':'418.835,448.501','thickness':'8'}" />
+	<line x1="419" y1="281" x2="419" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'4','start':'419,281','end':'419,103','thickness':'8'}" />
+	<line x1="690" y1="205" x2="690" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'5','start':'690,205','end':'690,103','thickness':'8'}" />
+	<line x1="164" y1="361" x2="164" y2="281" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'6','start':'164,361','end':'164,281','thickness':'8'}" />
+	<line x1="418.835" y1="448.501" x2="811" y2="448.501" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'7','start':'418.835,448.501','end':'811,448.501','thickness':'8'}" />
+	<line x1="122" y1="726" x2="418.835" y2="726" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'8','start':'122,726','end':'418.835,726','thickness':'8'}" />
+	<line x1="164" y1="281" x2="419" y2="281" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'9','start':'164,281','end':'419,281','thickness':'8'}" />
+	<line x1="419" y1="103" x2="690" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'10','start':'419,103','end':'690,103','thickness':'8'}" />
+	<line x1="690" y1="103" x2="811" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'11','start':'690,103','end':'811,103','thickness':'8'}" />
+	<line x1="261" y1="584" x2="418.835" y2="584" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'12','start':'261,584','end':'418.835,584','thickness':'8'}" />
+	<line x1="122" y1="361" x2="164" y2="361" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'13','start':'122,361','end':'164,361','thickness':'8'}" />
+	<line x1="164" y1="361" x2="252" y2="361" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'14','start':'164,361','end':'252,361','thickness':'8'}" />
+	<circle cx="811" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="811" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="122" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="122" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="419" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="419" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="690" cy="205" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="690" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="164" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="164" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="811" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="122" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="164" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="419" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="419" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="690" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="690" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="811" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="261" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="418.835" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="122" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="164" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="164" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<circle cx="252" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
+	<line x1="811" y1="426" x2="811" y2="371" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'0', 'hole-width':'55', 'hole-center-to-wall-start':'50.0013', 'direction':'right-inversed'}" />
+	<line x1="811" y1="426" x2="866" y2="426" stroke-width="4" stroke="rgb(0,128,0)" />
+	<circle cx="811" cy="426" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+	<line x1="441" y1="448.501" x2="496" y2="448.501" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'7', 'hole-width':'55', 'hole-center-to-wall-start':'49.6652', 'direction':'right-inversed'}" />
+	<line x1="441" y1="448.501" x2="441" y2="503.501" stroke-width="4" stroke="rgb(0,128,0)" />
+	<circle cx="441" cy="448.501" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+	<line x1="256" y1="281" x2="320" y2="281" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'9', 'hole-width':'64', 'hole-center-to-wall-start':'124', 'direction':'right-inversed'}" />
+	<line x1="256" y1="281" x2="256" y2="345" stroke-width="4" stroke="rgb(0,128,0)" />
+	<circle cx="256" cy="281" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+</svg>
