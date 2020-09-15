@@ -7,6 +7,7 @@ set(INCLUDE_DIR_LIST
     ${BIMSVG_PATH_INCLUDE}
     ${SVGPP_PATH_INCLUDE}
     ${Boost_INCLUDE_DIR}
+    ${RAPIDXMLNS_PATH_INCLUDE}
     )
 target_include_directories(demo PRIVATE ${INCLUDE_DIR_LIST})
 

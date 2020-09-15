@@ -15,59 +15,139 @@
 			<rect x="0" y="0" width="10" height="10" fill="rgb(128,128,128)" />
 		</pattern>
 	</defs>
-	<path d="M811,448.501 811,103 690,103 690,205 690,103 419,103 419,281 164,281 164,361 122,361 122,726 418.835,726 418.835,584 418.835,448.501 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '0,1,2,3,4,5,6,7,8,9,10,11,12,13,14'" />
-	<line x1="811" y1="448.501" x2="811" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'0','start':'811,448.501','end':'811,103','thickness':'8'}" />
-	<line x1="122" y1="726" x2="122" y2="361" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'1','start':'122,726','end':'122,361','thickness':'8'}" />
-	<line x1="418.835" y1="726" x2="418.835" y2="584" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'2','start':'418.835,726','end':'418.835,584','thickness':'8'}" />
-	<line x1="418.835" y1="584" x2="418.835" y2="448.501" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'3','start':'418.835,584','end':'418.835,448.501','thickness':'8'}" />
-	<line x1="419" y1="281" x2="419" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'4','start':'419,281','end':'419,103','thickness':'8'}" />
-	<line x1="690" y1="205" x2="690" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'5','start':'690,205','end':'690,103','thickness':'8'}" />
-	<line x1="164" y1="361" x2="164" y2="281" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'6','start':'164,361','end':'164,281','thickness':'8'}" />
-	<line x1="418.835" y1="448.501" x2="811" y2="448.501" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'7','start':'418.835,448.501','end':'811,448.501','thickness':'8'}" />
-	<line x1="122" y1="726" x2="418.835" y2="726" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'8','start':'122,726','end':'418.835,726','thickness':'8'}" />
-	<line x1="164" y1="281" x2="419" y2="281" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'9','start':'164,281','end':'419,281','thickness':'8'}" />
-	<line x1="419" y1="103" x2="690" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'10','start':'419,103','end':'690,103','thickness':'8'}" />
-	<line x1="690" y1="103" x2="811" y2="103" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'11','start':'690,103','end':'811,103','thickness':'8'}" />
-	<line x1="261" y1="584" x2="418.835" y2="584" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'12','start':'261,584','end':'418.835,584','thickness':'8'}" />
-	<line x1="122" y1="361" x2="164" y2="361" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'13','start':'122,361','end':'164,361','thickness':'8'}" />
-	<line x1="164" y1="361" x2="252" y2="361" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'14','start':'164,361','end':'252,361','thickness':'8'}" />
-	<circle cx="811" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="811" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="122" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="122" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="419" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="419" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="690" cy="205" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="690" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="164" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="164" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="811" cy="448.501" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="122" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="164" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="419" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="419" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="690" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="690" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="811" cy="103" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="261" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="418.835" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="122" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="164" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="164" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<circle cx="252" cy="361" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" />
-	<line x1="811" y1="426" x2="811" y2="371" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'0', 'hole-width':'55', 'hole-center-to-wall-start':'50.0013', 'direction':'right-inversed'}" />
-	<line x1="811" y1="426" x2="866" y2="426" stroke-width="4" stroke="rgb(0,128,0)" />
-	<circle cx="811" cy="426" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
-	<line x1="441" y1="448.501" x2="496" y2="448.501" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'7', 'hole-width':'55', 'hole-center-to-wall-start':'49.6652', 'direction':'right-inversed'}" />
-	<line x1="441" y1="448.501" x2="441" y2="503.501" stroke-width="4" stroke="rgb(0,128,0)" />
-	<circle cx="441" cy="448.501" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
-	<line x1="256" y1="281" x2="320" y2="281" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'9', 'hole-width':'64', 'hole-center-to-wall-start':'124', 'direction':'right-inversed'}" />
-	<line x1="256" y1="281" x2="256" y2="345" stroke-width="4" stroke="rgb(0,128,0)" />
-	<circle cx="256" cy="281" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+	<path d="M613.919,786 613.919,764 587,764 587,786 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '25,26,56,69'}" />
+	<path d="M1077,445.225 1077,347 967,347 967,445.225 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '8,14,46,53'}" />
+	<path d="M1147,235 1147,215 1124,215 1124,235 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '22,27,70,71'}" />
+	<path d="M811,445.225 811,103.022 1077,103.022 1077,347 967,347 967,445.225 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '5,9,14,42,45,53'}" />
+	<path d="M418.747,726 418.747,584 418.747,445.225 811,445.225 811,103.022 690,103.022 690,205 690,103.022 419,103.022 419,281 164.038,281 164.038,360.132 122,360.132 122,726 273.5,726 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '0,1,2,5,7,11,15,40,41,43,44,47,48,49,50,87'}" />
+	<path d="M419,281 419,103.022 164.038,103.022 164.038,281 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '2,12,39,50'}" />
+	<path d="M936,56.4475 936,43 952,43 952,56.4475 z " fill-rule="evenodd" fill="url(#unknown)" bimpp="{'type': 'area''wall-ids': '24,28,59,65'}" />
+	<line x1="418.747" y1="726" x2="418.747" y2="584" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'0','start_node_id':'0','start_end_id':'1','thickness':'8'}" />
+	<line x1="418.747" y1="584" x2="418.747" y2="445.225" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'1','start_node_id':'1','start_end_id':'2','thickness':'8'}" />
+	<line x1="419" y1="281" x2="419" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'2','start_node_id':'3','start_end_id':'4','thickness':'8'}" />
+	<line x1="811" y1="445.225" x2="811" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'5','start_node_id':'9','start_end_id':'10','thickness':'8'}" />
+	<line x1="122" y1="726" x2="122" y2="360.132" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'7','start_node_id':'13','start_end_id':'14','thickness':'8'}" />
+	<line x1="1077" y1="445.225" x2="1077" y2="347" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'8','start_node_id':'15','start_end_id':'16','thickness':'8'}" />
+	<line x1="1077" y1="347" x2="1077" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'9','start_node_id':'16','start_end_id':'17','thickness':'8'}" />
+	<line x1="164.038" y1="360.132" x2="164.038" y2="281" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'11','start_node_id':'20','start_end_id':'21','thickness':'8'}" />
+	<line x1="164.038" y1="281" x2="164.038" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'12','start_node_id':'21','start_end_id':'22','thickness':'8'}" />
+	<line x1="967" y1="445.225" x2="967" y2="347" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'14','start_node_id':'25','start_end_id':'26','thickness':'8'}" />
+	<line x1="690" y1="205" x2="690" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'15','start_node_id':'27','start_end_id':'28','thickness':'8'}" />
+	<line x1="1147" y1="235" x2="1147" y2="215" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'22','start_node_id':'41','start_end_id':'42','thickness':'8'}" />
+	<line x1="936" y1="56.4475" x2="936" y2="43" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'24','start_node_id':'45','start_end_id':'46','thickness':'8'}" />
+	<line x1="613.919" y1="786" x2="613.919" y2="764" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'25','start_node_id':'47','start_end_id':'48','thickness':'8'}" />
+	<line x1="587" y1="786" x2="587" y2="764" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'26','start_node_id':'49','start_end_id':'50','thickness':'8'}" />
+	<line x1="1124" y1="235" x2="1124" y2="215" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'27','start_node_id':'51','start_end_id':'52','thickness':'8'}" />
+	<line x1="952" y1="56.4475" x2="952" y2="43" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'28','start_node_id':'53','start_end_id':'54','thickness':'8'}" />
+	<line x1="164.038" y1="103.022" x2="419" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'39','start_node_id':'22','start_end_id':'4','thickness':'8'}" />
+	<line x1="419" y1="103.022" x2="690" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'40','start_node_id':'4','start_end_id':'28','thickness':'8'}" />
+	<line x1="690" y1="103.022" x2="811" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'41','start_node_id':'28','start_end_id':'10','thickness':'8'}" />
+	<line x1="811" y1="103.022" x2="1077" y2="103.022" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'42','start_node_id':'10','start_end_id':'17','thickness':'8'}" />
+	<line x1="273.5" y1="726" x2="418.747" y2="726" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'43','start_node_id':'61','start_end_id':'0','thickness':'8'}" />
+	<line x1="418.747" y1="445.225" x2="811" y2="445.225" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'44','start_node_id':'2','start_end_id':'9','thickness':'8'}" />
+	<line x1="811" y1="445.225" x2="967" y2="445.225" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'45','start_node_id':'9','start_end_id':'25','thickness':'8'}" />
+	<line x1="967" y1="445.225" x2="1077" y2="445.225" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'46','start_node_id':'25','start_end_id':'15','thickness':'8'}" />
+	<line x1="122" y1="360.132" x2="164.038" y2="360.132" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'47','start_node_id':'14','start_end_id':'20','thickness':'8'}" />
+	<line x1="164.038" y1="360.132" x2="252" y2="360.132" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'48','start_node_id':'20','start_end_id':'62','thickness':'8'}" />
+	<line x1="261" y1="584" x2="418.747" y2="584" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'49','start_node_id':'63','start_end_id':'1','thickness':'8'}" />
+	<line x1="164.038" y1="281" x2="419" y2="281" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'50','start_node_id':'21','start_end_id':'3','thickness':'8'}" />
+	<line x1="967" y1="347" x2="1077" y2="347" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'53','start_node_id':'26','start_end_id':'16','thickness':'8'}" />
+	<line x1="587" y1="764" x2="613.919" y2="764" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'56','start_node_id':'50','start_end_id':'48','thickness':'8'}" />
+	<line x1="936" y1="56.4475" x2="952" y2="56.4475" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'59','start_node_id':'45','start_end_id':'53','thickness':'8'}" />
+	<line x1="936" y1="43" x2="952" y2="43" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'65','start_node_id':'46','start_end_id':'54','thickness':'8'}" />
+	<line x1="587" y1="786" x2="613.919" y2="786" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'69','start_node_id':'49','start_end_id':'47','thickness':'8'}" />
+	<line x1="1124" y1="235" x2="1147" y2="235" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'70','start_node_id':'51','start_end_id':'41','thickness':'8'}" />
+	<line x1="1124" y1="215" x2="1147" y2="215" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'71','start_node_id':'52','start_end_id':'42','thickness':'8'}" />
+	<line x1="273.5" y1="726" x2="122" y2="726" stroke-width="8" stroke="rgb(0,0,0)" bimpp="{'type':'wall','id':'87','start_node_id':'61','start_end_id':'13','thickness':'8'}" />
+	<circle cx="418.747" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'0','x':'418.747','y':'726'}" />
+	<circle cx="418.747" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'1','x':'418.747','y':'584'}" />
+	<circle cx="418.747" cy="445.225" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'2','x':'418.747','y':'445.225'}" />
+	<circle cx="419" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'3','x':'419','y':'281'}" />
+	<circle cx="419" cy="103.022" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'4','x':'419','y':'103.022'}" />
+	<circle cx="419" cy="66" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'5','x':'419','y':'66'}" />
+	<circle cx="419" cy="66" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'6','x':'419','y':'66'}" />
+	<circle cx="811" cy="763" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'7','x':'811','y':'763'}" />
+	<circle cx="811" cy="763" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'8','x':'811','y':'763'}" />
+	<circle cx="811" cy="445.225" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'9','x':'811','y':'445.225'}" />
+	<circle cx="811" cy="103.022" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'10','x':'811','y':'103.022'}" />
+	<circle cx="811" cy="66" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'11','x':'811','y':'66'}" />
+	<circle cx="811" cy="66" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'12','x':'811','y':'66'}" />
+	<circle cx="122" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'13','x':'122','y':'726'}" />
+	<circle cx="122" cy="360.132" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'14','x':'122','y':'360.132'}" />
+	<circle cx="1077" cy="445.225" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'15','x':'1077','y':'445.225'}" />
+	<circle cx="1077" cy="347" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'16','x':'1077','y':'347'}" />
+	<circle cx="1077" cy="103.022" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'17','x':'1077','y':'103.022'}" />
+	<circle cx="1080" cy="47.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'18','x':'1080','y':'47.5'}" />
+	<circle cx="1080" cy="47.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'19','x':'1080','y':'47.5'}" />
+	<circle cx="164.038" cy="360.132" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'20','x':'164.038','y':'360.132'}" />
+	<circle cx="164.038" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'21','x':'164.038','y':'281'}" />
+	<circle cx="164.038" cy="103.022" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'22','x':'164.038','y':'103.022'}" />
+	<circle cx="967" cy="763" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'23','x':'967','y':'763'}" />
+	<circle cx="967" cy="763" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'24','x':'967','y':'763'}" />
+	<circle cx="967" cy="445.225" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'25','x':'967','y':'445.225'}" />
+	<circle cx="967" cy="347" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'26','x':'967','y':'347'}" />
+	<circle cx="690" cy="205" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'27','x':'690','y':'205'}" />
+	<circle cx="690" cy="103.022" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'28','x':'690','y':'103.022'}" />
+	<circle cx="52" cy="539.75" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'29','x':'52','y':'539.75'}" />
+	<circle cx="52" cy="542" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'30','x':'52','y':'542'}" />
+	<circle cx="45" cy="412.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'31','x':'45','y':'412.5'}" />
+	<circle cx="45" cy="412.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'32','x':'45','y':'412.5'}" />
+	<circle cx="50.6364" cy="189.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'33','x':'50.6364','y':'189.5'}" />
+	<circle cx="50.6364" cy="192" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'34','x':'50.6364','y':'192'}" />
+	<circle cx="62.6303" cy="543.125" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'35','x':'62.6303','y':'543.125'}" />
+	<circle cx="62.6303" cy="543.125" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'36','x':'62.6303','y':'543.125'}" />
+	<circle cx="62.6303" cy="303.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'37','x':'62.6303','y':'303.5'}" />
+	<circle cx="62.6303" cy="303.5" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'38','x':'62.6303','y':'303.5'}" />
+	<circle cx="62.6303" cy="193.25" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'39','x':'62.6303','y':'193.25'}" />
+	<circle cx="62.6303" cy="193.25" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'40','x':'62.6303','y':'193.25'}" />
+	<circle cx="1147" cy="235" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'41','x':'1147','y':'235'}" />
+	<circle cx="1147" cy="215" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'42','x':'1147','y':'215'}" />
+	<circle cx="140" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'43','x':'140','y':'56.4475'}" />
+	<circle cx="140" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'44','x':'140','y':'56.4475'}" />
+	<circle cx="936" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'45','x':'936','y':'56.4475'}" />
+	<circle cx="936" cy="43" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'46','x':'936','y':'43'}" />
+	<circle cx="613.919" cy="786" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'47','x':'613.919','y':'786'}" />
+	<circle cx="613.919" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'48','x':'613.919','y':'764'}" />
+	<circle cx="587" cy="786" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'49','x':'587','y':'786'}" />
+	<circle cx="587" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'50','x':'587','y':'764'}" />
+	<circle cx="1124" cy="235" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'51','x':'1124','y':'235'}" />
+	<circle cx="1124" cy="215" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'52','x':'1124','y':'215'}" />
+	<circle cx="952" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'53','x':'952','y':'56.4475'}" />
+	<circle cx="952" cy="43" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'54','x':'952','y':'43'}" />
+	<circle cx="746" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'55','x':'746','y':'56.4475'}" />
+	<circle cx="746" cy="44.0229" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'56','x':'746','y':'44.0229'}" />
+	<circle cx="550" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'57','x':'550','y':'56.4475'}" />
+	<circle cx="550" cy="44.0229" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'58','x':'550','y':'44.0229'}" />
+	<circle cx="293.875" cy="56.4475" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'59','x':'293.875','y':'56.4475'}" />
+	<circle cx="293.875" cy="44.0229" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'60','x':'293.875','y':'44.0229'}" />
+	<circle cx="273.5" cy="726" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'61','x':'273.5','y':'726'}" />
+	<circle cx="252" cy="360.132" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'62','x':'252','y':'360.132'}" />
+	<circle cx="261" cy="584" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'63','x':'261','y':'584'}" />
+	<circle cx="62.6303" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'64','x':'62.6303','y':'281'}" />
+	<circle cx="62.6303" cy="281" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'65','x':'62.6303','y':'281'}" />
+	<circle cx="1142.5" cy="350" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'66','x':'1142.5','y':'350'}" />
+	<circle cx="1142.5" cy="350" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'67','x':'1142.5','y':'350'}" />
+	<circle cx="1022" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'68','x':'1022','y':'764'}" />
+	<circle cx="1022" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'69','x':'1022','y':'764'}" />
+	<circle cx="889" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'70','x':'889','y':'764'}" />
+	<circle cx="889" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'71','x':'889','y':'764'}" />
+	<circle cx="624" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'72','x':'624','y':'764'}" />
+	<circle cx="273.5" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'73','x':'273.5','y':'764'}" />
+	<circle cx="273.5" cy="764" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'74','x':'273.5','y':'764'}" />
+	<circle cx="579.75" cy="44.0229" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'75','x':'579.75','y':'44.0229'}" />
+	<circle cx="579.75" cy="44.0229" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'76','x':'579.75','y':'44.0229'}" />
+	<circle cx="148" cy="44" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'77','x':'148','y':'44'}" />
+	<circle cx="164" cy="68" r="0.5" fill="rgb(255,0,0)" stroke-width="2" stroke="rgb(255,0,0)" bimpp="{'type':'node','id':'78','x':'164','y':'68'}" />
+	<line x1="811" y1="425" x2="811" y2="372" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'5', 'hole-width':'53', 'hole-center-to-wall-start':'46.7251', 'direction':'right-inversed'}" />
+	<line x1="811" y1="425" x2="864" y2="425" stroke-width="4" stroke="rgb(0,128,0)" />
+	<circle cx="811" cy="425" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+	<line x1="967" y1="430" x2="967" y2="357" stroke-width="8" stroke="rgb(0,255,0)" bimpp="{'type':'door-double', 'hole-on-wall-id':'14', 'hole-width':'73', 'hole-center-to-wall-start':'51.7251', 'direction':'right'}" />
+	<line x1="967" y1="430" x2="894" y2="430" stroke-width="4" stroke="rgb(0,255,0)" />
+	<circle cx="967" cy="430" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+	<line x1="442.5" y1="445.225" x2="493.5" y2="445.225" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'44', 'hole-width':'51', 'hole-center-to-wall-start':'49.2527', 'direction':'right-inversed'}" />
+	<line x1="442.5" y1="445.225" x2="442.5" y2="496.225" stroke-width="4" stroke="rgb(0,128,0)" />
+	<circle cx="442.5" cy="445.225" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
+	<line x1="258" y1="281" x2="318" y2="281" stroke-width="8" stroke="rgb(0,128,0)" bimpp="{'type':'door', 'hole-on-wall-id':'50', 'hole-width':'60', 'hole-center-to-wall-start':'123.962', 'direction':'right-inversed'}" />
+	<line x1="258" y1="281" x2="258" y2="341" stroke-width="4" stroke="rgb(0,128,0)" />
+	<circle cx="258" cy="281" r="0.5" fill="rgb(255,255,255)" stroke-width="2" stroke="rgb(255,255,255)" />
 </svg>

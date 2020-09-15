@@ -20,8 +20,9 @@ set(BIMSVG_PATH_OUTPUT ${CMAKE_SOURCE_DIR}/output)
 set(BIMSVG_PATH_OUTPUT_BIN ${BIMSVG_PATH_OUTPUT}/bin)
 set(BIMSVG_PATH_OUTPUT_LIB ${BIMSVG_PATH_OUTPUT}/lib)
 
-find_package(SVGPP REQUIRED)
 find_package(Boost REQUIRED)
+find_package(RapidXMLNS REQUIRED)
+find_package(SVGPP REQUIRED)
 
 add_subdirectory(docs)
 add_subdirectory(src)
