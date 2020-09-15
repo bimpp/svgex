@@ -1,0 +1,13 @@
+set(CODE_FILE_LIST
+    demo.cpp
+    )
+add_executable(demo ${CODE_FILE_LIST})
+
+set(INCLUDE_DIR_LIST
+    ${BIMSVG_PATH_INCLUDE}
+    ${SVGPP_PATH_INCLUDE}
+    ${Boost_INCLUDE_DIR}
+    )
+target_include_directories(demo PRIVATE ${INCLUDE_DIR_LIST})
+
+set_target_properties(demo PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIMSVG_PATH_OUTPUT_BIN})
