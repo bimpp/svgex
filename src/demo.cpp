@@ -31,17 +31,28 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    // load the svg file
     std::ifstream ifs(argv[1], std::ifstream::in);
     if (!ifs.good())
     {
         return 1;
     }
 
-    std::string str((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+    std::string svg_context((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-    typedef bimsvg<double> bimsvg_d;
-    bimsvg_d::plan plan;
+    // parse the svg to the bim
+    bimsvg<>::plan bim_plan;
     std::string error_message;
-    bimsvg_d::load_from_string(str, plan, error_message, true);
+    if (!bimsvg<>::load_from_string(svg_context, bim_plan, error_message, true))
+    {
+        return 1;
+    }
+
+    // get the sorted nodes
+    std::vector<size_t> bim_node_ids;
+    if (!bim_plan.area_node_ids(4, bim_node_ids))
+    {
+        return 1;
+    }
     return 0;
 }

@@ -25,13 +25,18 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <algorithm>
 
 #include <rapidxml_ns.hpp>
 #include <svgpp/svgpp.hpp>
 #include <svgpp/policy/xml/rapidxml_ns.hpp>
 #include <rapidjson/document.h>
 
-template<typename T>
+#ifndef M_PI
+#define M_PI       3.14159265358979323846   // pi
+#endif
+
+template<typename T = double>
 class bimsvg
 {
 public:
@@ -132,8 +137,7 @@ public:
 
         bool is_valid() const
         {
-            //
-            return !areas.empty();
+            return (!nodes.empty() && !walls.empty() && !areas.empty());
         }
 
         void reset()
@@ -145,25 +149,146 @@ public:
             areas.clear();
         }
 
-        bool area_wall_ids(size_t _area_id, std::vector<size_t>& _wall_ids) const
+        bool area_wall_ids(size_t _area_id, std::vector<size_t>& _wall_ids, std::vector<bool>& _inverse_walls) const
         {
-            if (areas.find(_area_id) == areas.cend())
+            const std::map<size_t, area>::const_iterator cit_found_area = areas.find(_area_id);
+            if (cit_found_area == areas.cend())
             {
                 return false;
             }
-            const area& bim_area = areas[_area_id];
-            //TODO:
-            return true;
+
+            struct next_node
+            {
+                size_t  wall_id;
+                bool    inversed;
+                size_t  node_id;
+                T       sin_angle_ex;
+                bool    used;
+
+                next_node()
+                    : wall_id(0)
+                    , inversed(false)
+                    , node_id(0)
+                    , sin_angle_ex(0)
+                    , used(false)
+                {}
+            };
+            std::map<size_t, std::vector<next_node>> bim_next_nodes;
+
+            const area& bim_area = cit_found_area->second;
+            for (const size_t wall_id : bim_area.wall_ids)
+            {
+                const wall& bim_wall = walls.find(wall_id)->second;
+                next_node bim_next_node;
+                bim_next_node.wall_id = wall_id;
+                bim_next_node.inversed = false;
+                bim_next_node.node_id = bim_wall.end_node_id;
+                bim_next_nodes[bim_wall.start_node_id].push_back(bim_next_node);
+                bim_next_node.inversed = true;
+                bim_next_node.node_id = bim_wall.start_node_id;
+                bim_next_nodes[bim_wall.end_node_id].push_back(bim_next_node);
+            }
+
+            auto equal_node = [](const node& _a, const node& _b, T _e = 0.000001) {
+                if (abs(_a.x - _b.x) > _e)
+                {
+                    return false;
+                }
+                if (abs(_a.y - _b.y) > _e)
+                {
+                    return false;
+                }
+                return true;
+            };
+
+            auto calculate_sin_angle_ex = [](const node& _o, const node& _a, const node& _b) {
+                node line_a(_a.x - _o.x, _a.y - _o.y);
+                T len_a = sqrt(line_a.x * line_a.x + line_a.y * line_a.y);
+                if (len_a != 0)
+                {
+                    line_a.x /= len_a;
+                    line_a.y /= len_a;
+                }
+                node line_b(_b.x - _o.x, _b.y - _o.y);
+                T len_b = sqrt(line_b.x * line_b.x + line_b.y * line_b.y);
+                if (len_b != 0)
+                {
+                    line_b.x /= len_b;
+                    line_b.y /= len_b;
+                }
+                T sin_res = line_a.x * line_b.y - line_a.y * line_b.x;
+                T cos_res = line_a.x * line_b.x + line_a.y * line_b.y;
+                T res = sin_res;
+                if (cos_res < static_cast<T>(0))
+                {
+                    if (sin_res >= static_cast<T>(0))
+                    {
+                        res = static_cast<T>(2) - res;
+                    }
+                    else
+                    {
+                        res = static_cast<T>(-2) + res;
+                    }
+                }
+                if (res < static_cast<T>(0))
+                {
+                    res = static_cast<T>(4) + res;
+                }
+                return res;
+            };
+
+            for (std::map<size_t, std::vector<next_node>>::iterator it = bim_next_nodes.begin(); it != bim_next_nodes.end(); ++it)
+            {
+                const node& bim_node_o = nodes.find(it->first)->second;
+                const node bim_node_a(bim_node_o.x, bim_node_o.y + static_cast<T>(1));
+                std::vector<next_node>& bim_next_nodes = it->second;
+                for (next_node& bim_next_node : bim_next_nodes)
+                {
+                    const node& bim_node_b = nodes.find(bim_next_node.node_id)->second;
+                    bim_next_node.sin_angle_ex = calculate_sin_angle_ex(bim_node_o, bim_node_a, bim_node_b);
+                }
+            }
+
+            if (bim_next_nodes.empty())
+            {
+                return false;
+            }
+
+            size_t bim_highest_node_id = bim_next_nodes.cbegin()->first;
+            {
+                node bim_highest_node = nodes.find(bim_highest_node_id)->second;
+                for (std::map<size_t, std::vector<next_node>>::iterator it = bim_next_nodes.begin(); it != bim_next_nodes.end(); ++it)
+                {
+                    if (bim_highest_node_id == it->first) continue;
+                    const node& bim_node = nodes.find(it->first)->second;
+                    if (bim_highest_node.y >= bim_node.y) continue;
+                    bim_highest_node_id = it->first;
+                    bim_highest_node = bim_node;
+                }
+            }
+
+            //TODO: sort walls
+
+            return !_wall_ids.empty();
         }
 
         bool area_node_ids(size_t _area_id, std::vector<size_t>& _node_ids) const
         {
             std::vector<size_t> wall_ids;
-            if (!area_wall_ids(_area_id, wall_ids))
+            std::vector<bool> inverse_walls;
+            if (!area_wall_ids(_area_id, wall_ids, inverse_walls))
             {
                 return false;
             }
-            //TODO:
+            if (wall_ids.size() != inverse_walls.size())
+            {
+                return false;
+            }
+            for (size_t i = 0, ic = wall_ids.size(); i < ic; ++i)
+            {
+                const wall& bim_wall = walls.find(wall_ids[i])->second;
+                _node_ids.push_back(!inverse_walls[i] ? bim_wall.start_node_id : bim_wall.end_node_id);
+            }
             return true;
         }
     };
@@ -272,7 +397,13 @@ public:
                 }
                 for (rapidjson::Value::ConstValueIterator itr = json_wall_ids.Begin(); itr != json_wall_ids.End(); ++itr)
                 {
-                    new_area.wall_ids.push_back(itr->GetUint64());
+                    const size_t bim_wall_id = itr->GetUint64();
+                    // remove the repeated wall.
+                    if (std::find(new_area.wall_ids.cbegin(), new_area.wall_ids.cend(), bim_wall_id) != new_area.wall_ids.cend())
+                    {
+                        continue;
+                    }
+                    new_area.wall_ids.push_back(bim_wall_id);
                 }
                 if (new_area.wall_ids.empty())
                 {
