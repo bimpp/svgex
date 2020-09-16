@@ -4,3 +4,6 @@
 [submodule "externals/svgpp"]
 	path = externals/svgpp
 	url = https://gitee.com/bimpp/svgpp.git
+[submodule "externals/rapidjson"]
+	path = externals/rapidjson
+	url = https://gitee.com/bimpp/rapidjson.git

@@ -23,6 +23,7 @@ set(BIMSVG_PATH_OUTPUT_LIB ${BIMSVG_PATH_OUTPUT}/lib)
 find_package(Boost REQUIRED)
 find_package(RapidXMLNS REQUIRED)
 find_package(SVGPP REQUIRED)
+find_package(RapidJSON REQUIRED)
 
 add_subdirectory(docs)
 add_subdirectory(src)
