@@ -20,4 +20,4 @@
 
 ## 许可
 
-遵循[MIT License](LICNESE)
+遵循[MIT License](LICENSE)
