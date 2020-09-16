@@ -3,7 +3,7 @@
 ## 用途
 
 * 定义户型数据
-* 将`户型识别`的svg结果转换为户型数据
+* 将[户型识别](https://bimpp.cn/docs/planreader)的`svg`结果转换为户型数据
 
 ## [使用方法](docs/usage.md)
 
