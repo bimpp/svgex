@@ -1,4 +1,5 @@
 set(CODE_FILE_LIST
+    ${BIMSVG_PATH_INCLUDE}/bimsvg/bimsvg.hpp
     demo.cpp
     )
 add_executable(demo ${CODE_FILE_LIST})
