@@ -25,6 +25,14 @@ find_package(RapidXMLNS REQUIRED)
 find_package(SVGPP REQUIRED)
 find_package(RapidJSON REQUIRED)
 
+set(BIMSVG_PATH_INCLUDE_LIST
+    ${Boost_INCLUDE_DIR}
+    ${RAPIDXMLNS_PATH_INCLUDE}
+    ${SVGPP_PATH_INCLUDE}
+    ${RAPIDJSON_PATH_INCLUDE}
+    ${BIMSVG_PATH_INCLUDE}
+    )
+
 add_subdirectory(docs)
 add_subdirectory(src)
 
