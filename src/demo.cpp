@@ -41,16 +41,56 @@ int main(int argc, char* argv[])
     std::string svg_context((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
     // parse the svg to the bim
-    bimsvg<>::plan bim_plan;
+    bimsvg<>::Plan bim_plan;
     std::string error_message;
     if (!bimsvg<>::load_from_string(svg_context, bim_plan, error_message, true))
     {
         return 1;
     }
 
+    bim_plan.reset();
+    bim_plan.nodes.insert(std::make_pair<>(0, bimsvg<>::Node(0.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(1, bimsvg<>::Node(20.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(2, bimsvg<>::Node(20.0, 20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(3, bimsvg<>::Node(0.0, 20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(4, bimsvg<>::Node(10.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(5, bimsvg<>::Node(10.0, 10.0)));
+    bim_plan.nodes.insert(std::make_pair<>(6, bimsvg<>::Node(10.0, -10.0)));
+    bim_plan.nodes.insert(std::make_pair<>(7, bimsvg<>::Node(10.0, -20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(8, bimsvg<>::Node(0.0, -20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(9, bimsvg<>::Node(0.0, -10.0)));
+    bim_plan.nodes.insert(std::make_pair<>(10, bimsvg<>::Node(-10.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(11, bimsvg<>::Node(-10.0, 10.0)));
+    bim_plan.walls.insert(std::make_pair<>(0, bimsvg<>::Wall(0, 4)));
+    bim_plan.walls.insert(std::make_pair<>(1, bimsvg<>::Wall(4, 5)));
+    bim_plan.walls.insert(std::make_pair<>(2, bimsvg<>::Wall(4, 1)));
+    bim_plan.walls.insert(std::make_pair<>(3, bimsvg<>::Wall(1, 2)));
+    bim_plan.walls.insert(std::make_pair<>(4, bimsvg<>::Wall(2, 3)));
+    bim_plan.walls.insert(std::make_pair<>(5, bimsvg<>::Wall(3, 0)));
+    bim_plan.walls.insert(std::make_pair<>(6, bimsvg<>::Wall(4, 6)));
+    bim_plan.walls.insert(std::make_pair<>(7, bimsvg<>::Wall(6, 7)));
+    bim_plan.walls.insert(std::make_pair<>(8, bimsvg<>::Wall(7, 8)));
+    bim_plan.walls.insert(std::make_pair<>(9, bimsvg<>::Wall(8, 9)));
+    bim_plan.walls.insert(std::make_pair<>(10, bimsvg<>::Wall(9, 6)));
+    bim_plan.walls.insert(std::make_pair<>(11, bimsvg<>::Wall(10, 11)));
+    bimsvg<>::Area bim_area;
+    bim_area.wall_ids.push_back(0);
+    bim_area.wall_ids.push_back(1);
+    bim_area.wall_ids.push_back(2);
+    bim_area.wall_ids.push_back(3);
+    bim_area.wall_ids.push_back(4);
+    bim_area.wall_ids.push_back(5);
+    bim_area.wall_ids.push_back(6);
+    bim_area.wall_ids.push_back(7);
+    bim_area.wall_ids.push_back(8);
+    bim_area.wall_ids.push_back(9);
+    bim_area.wall_ids.push_back(10);
+    bim_area.wall_ids.push_back(11);
+    bim_plan.areas.insert(std::make_pair<>(0, bim_area));
+
     // get the sorted nodes
-    std::vector<size_t> bim_node_ids;
-    if (!bim_plan.area_node_ids(4, bim_node_ids))
+    std::vector<bimsvg<>::Path> bim_paths;
+    if (!bim_plan.calculate_paths(0, bim_paths))
     {
         return 1;
     }

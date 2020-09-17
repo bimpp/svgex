@@ -33,6 +33,10 @@ set(BIMSVG_PATH_INCLUDE_LIST
     ${BIMSVG_PATH_INCLUDE}
     )
 
+set(BIMSVG_PATH_SRC_FILE_LIST
+    ${BIMSVG_PATH_INCLUDE}/bimsvg/bimsvg.hpp
+    )
+
 add_subdirectory(docs)
 add_subdirectory(src)
 
