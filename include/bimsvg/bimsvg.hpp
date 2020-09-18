@@ -194,7 +194,7 @@ public:
 
         bool calculate_paths(size_t _area_id, std::vector<Path>& _paths) const
         {
-            const std::map<size_t, Area>::const_iterator cit_found_area = areas.find(_area_id);
+            const typename std::map<size_t, Area>::const_iterator cit_found_area = areas.find(_area_id);
             if (cit_found_area == areas.cend())
             {
                 return false;
@@ -267,7 +267,7 @@ public:
                 size_t bim_last_node_id = bim_start_node_id;
                 size_t bim_first_wall_start_node_id = 0;
                 size_t bim_first_wall_end_node_id = 0;
-                Path::WallEx bim_first_wall_ex;
+                typename Path::WallEx bim_first_wall_ex;
                 while (true)
                 {
                     const Node& bim_start_node = nodes.find(bim_start_node_id)->second;
@@ -300,12 +300,12 @@ public:
                             break;
                         }
 
-                        std::map<T, size_t>::const_iterator sin_angle_ex_2_index_last = sin_angle_ex_2_index.cend();
+                        typename std::map<T, size_t>::const_iterator sin_angle_ex_2_index_last = sin_angle_ex_2_index.cend();
                         --sin_angle_ex_2_index_last;
                         NextNode& bim_next_node = bim_next_nodes[sin_angle_ex_2_index_last->second];
                         bim_next_node.used = true;
 
-                        Path::WallEx wall_ex;
+                        typename Path::WallEx wall_ex;
                         wall_ex.wall_id = bim_next_node.wall_id;
                         wall_ex.inversed = bim_next_node.wall_inversed;
                         bim_closed_path.walls.push_back(wall_ex);
@@ -332,10 +332,10 @@ public:
                     _paths.push_back(bim_closed_path);
                 }
 
-                for (std::map<size_t, std::vector<NextNode>>::iterator it_m = bim_node_2_next_nodes.begin(); it_m != bim_node_2_next_nodes.end();)
+                for (typename std::map<size_t, std::vector<NextNode>>::iterator it_m = bim_node_2_next_nodes.begin(); it_m != bim_node_2_next_nodes.end();)
                 {
                     std::vector<NextNode>& bim_next_nodes = it_m->second;
-                    for (std::vector<NextNode>::iterator it_v = bim_next_nodes.begin(); it_v != bim_next_nodes.end();)
+                    for (typename std::vector<NextNode>::iterator it_v = bim_next_nodes.begin(); it_v != bim_next_nodes.end();)
                     {
                         if (it_v->used)
                         {
@@ -596,43 +596,43 @@ private:
     {
         template<class XMLAttribute, class AttributeName>
         static bool unknown_attribute(bim_context& _context,
-            XMLAttribute const& attribute,
+            XMLAttribute const& _attribute,
             AttributeName const& name,
             BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
             svgpp::tag::source::attribute,
             typename boost::enable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
         {
-            const std::string attribute_name = attribute->name();
+            const std::string attribute_name = _attribute->name();
             if (attribute_name == "bimpp")
             {
-                const std::string attribute_value = attribute->value();
+                const std::string attribute_value = _attribute->value();
                 _context.on_bimpp(attribute_value);
                 return true;
             }
             if (namespace_id == svgpp::detail::namespace_id::svg)
-                throw svgpp::unknown_attribute_error(name) << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(attribute);
+                throw svgpp::unknown_attribute_error(name) << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(_attribute);
             else
                 return true;
         }
 
         template<class XMLAttribute, class AttributeName>
-        static bool unknown_attribute(bim_context&,
-            XMLAttribute const& attribute,
+        static bool unknown_attribute(bim_context& _context,
+            XMLAttribute const& _attribute,
             AttributeName const&,
             BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
             svgpp::tag::source::attribute,
             typename boost::disable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
         {
-            const std::string attribute_name = attribute->name();
+            const std::string attribute_name = _attribute->name();
             if (attribute_name == "bimpp")
             {
-                const std::string attribute_value = attribute->value();
+                const std::string attribute_value = _attribute->value();
                 _context.on_bimpp(attribute_value);
                 return true;
             }
-            const std::string attribute_value = attribute->value();
+            const std::string attribute_value = _attribute->value();
             if (namespace_id == svgpp::detail::namespace_id::svg)
-                throw svgpp::unknown_attribute_error() << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(attribute);
+                throw svgpp::unknown_attribute_error() << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(_attribute);
             else
                 return true;
         }
