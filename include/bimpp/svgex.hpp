@@ -38,19 +38,26 @@
 
 namespace bimpp
 {
+    /*!
+     * main
+     */
     template<typename T = double>
     class svgex
     {
     public:
-        union Node
+        /*!
+         * This is a 2d point
+         */
+        struct Node
         {
-            struct
-            {
-                T x;
-                T y;
-            };
-            std::array<T, 2> d;
+            T x;    //< value in x-axis
+            T y;    //< value in y-axis
 
+            /*!
+             * A constructor
+             * /param _x value in x-axis
+             * /param _y value in y-axis
+             */
             Node(T _x = 0, T _y = 0)
                 : x(_x)
                 , y(_y)
@@ -370,7 +377,7 @@ namespace bimpp
             }
         };
 
-        class bim_context
+        class BimPPContext
         {
         public:
             void on_enter_element(svgpp::tag::element::any _any) {}
@@ -599,10 +606,10 @@ namespace bimpp
     private:
         typedef rapidxml_ns::xml_node<> const* xml_element_t;
 
-        struct bim_error_policy : svgpp::policy::error::raise_exception<bim_context>
+        struct BimPPErrorPolicy : svgpp::policy::error::raise_exception<BimPPContext>
         {
             template<class XMLAttribute, class AttributeName>
-            static bool unknown_attribute(bim_context& _context,
+            static bool unknown_attribute(BimPPContext& _context,
                 XMLAttribute const& _attribute,
                 AttributeName const& name,
                 BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
@@ -623,7 +630,7 @@ namespace bimpp
             }
 
             template<class XMLAttribute, class AttributeName>
-            static bool unknown_attribute(bim_context& _context,
+            static bool unknown_attribute(BimPPContext& _context,
                 XMLAttribute const& _attribute,
                 AttributeName const&,
                 BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
@@ -645,7 +652,7 @@ namespace bimpp
             }
 
             template<class XMLAttribute, class AttributeName>
-            SVGPP_NORETURN static bool unknown_attribute(bim_context const&,
+            SVGPP_NORETURN static bool unknown_attribute(BimPPContext const&,
                 XMLAttribute const& attribute,
                 AttributeName const& name,
                 svgpp::tag::source::css,
@@ -655,7 +662,7 @@ namespace bimpp
             }
 
             template<class XMLAttribute, class AttributeName>
-            SVGPP_NORETURN static bool unknown_attribute(bim_context const&,
+            SVGPP_NORETURN static bool unknown_attribute(BimPPContext const&,
                 XMLAttribute const& attribute,
                 AttributeName const&,
                 svgpp::tag::source::css,
@@ -670,7 +677,7 @@ namespace bimpp
             svgpp::tag::element::circle,
             svgpp::tag::element::line,
             svgpp::tag::element::path
-        >::type bim_processed_elements_t;
+        >::type TBimPPProcessedElements;
 
         typedef boost::mpl::set<
             boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::cx>,
@@ -681,14 +688,14 @@ namespace bimpp
             boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::x2>,
             boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::y2>,
             boost::mpl::pair<svgpp::tag::element::path, svgpp::tag::attribute::d>
-        >::type bim_processed_attributes_by_element_t;
+        >::type TBimPPProcessedAttributesByElement;
 
     public:
         static bool load_from_string(std::string& _svg, Plan& _plan, std::string& _error, bool _check = false)
         {
             try
             {
-                bim_context context;
+                BimPPContext context;
                 rapidxml_ns::xml_document<> xml_doc;
                 xml_doc.parse<0>(&_svg[0]);
                 rapidxml_ns::xml_node<>* xml_svg_element = xml_doc.first_node("svg");
@@ -697,9 +704,9 @@ namespace bimpp
                     return false;
                 }
                 svgpp::document_traversal<
-                    svgpp::error_policy<bim_error_policy>,
-                    svgpp::processed_elements<bim_processed_elements_t>,
-                    svgpp::processed_attributes<bim_processed_attributes_by_element_t>
+                    svgpp::error_policy<BimPPErrorPolicy>,
+                    svgpp::processed_elements<TBimPPProcessedElements>,
+                    svgpp::processed_attributes<TBimPPProcessedAttributesByElement>
                 >::load_document(xml_svg_element, context);
                 return context.get_plan(_plan, _check);
             }

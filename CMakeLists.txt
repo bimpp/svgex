@@ -37,7 +37,6 @@ set(BIMPP_SVGEX_PATH_SRC_FILE_LIST
     ${BIMPP_SVGEX_PATH_INCLUDE}/bimpp/svgex.hpp
     )
 
-add_subdirectory(docs)
 add_subdirectory(src)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT demo)
