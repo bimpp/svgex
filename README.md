@@ -8,9 +8,9 @@
 * 将[户型识别](https://bimpp.cn/docs/planreader)的`svg`结果转换为户型数据
 * 从离散的墙数据获取区域边界
 
-## [使用方法](docs/usage.md)
+## 使用方法
 
-参见：[src/demo.cpp](src/demo.cpp)和[docs/usage.md](docs/usage.md)。
+参见：[src/demo.cpp](src/demo.cpp)。
 
 ## 关于第三方
 

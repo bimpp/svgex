@@ -39,24 +39,23 @@
 namespace bimpp
 {
     /*!
-     * main
+     * 扩展svg数据
      */
     template<typename T = double>
     class svgex
     {
     public:
         /*!
-         * This is a 2d point
+         * 这个结构体表示节点，两个节点确定一段无向墙
          */
         struct Node
         {
-            T x;    //< value in x-axis
-            T y;    //< value in y-axis
+            T x;    ///< x轴值
+            T y;    ///< y轴值
 
             /*!
-             * A constructor
-             * /param _x value in x-axis
-             * /param _y value in y-axis
+             * \param _x x轴值
+             * \param _y y轴值
              */
             Node(T _x = 0, T _y = 0)
                 : x(_x)
@@ -66,12 +65,15 @@ namespace bimpp
             }
         };
 
+        /*!
+         * 此结构体表示下一个节点，主要用于计算闭合区域。
+         */
         struct NextNode
         {
-            size_t  wall_id;
-            bool    wall_inversed;
-            size_t  node_id;
-            bool    used;
+            size_t  wall_id;        ///< 墙id
+            bool    wall_inversed;  ///< 墙是否反向
+            size_t  node_id;        ///< 节点id
+            bool    used;           ///< 用于标记是否已使用
 
             NextNode()
                 : wall_id(0)
