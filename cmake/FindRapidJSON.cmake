@@ -1,4 +1,4 @@
-set(RAPIDJSON_PATH "${BIMSVG_PATH_EXTERNALS}/rapidjson")
+set(RAPIDJSON_PATH "${BIMPP_SVGEX_PATH_EXTERNALS}/rapidjson")
 
 find_path(RAPIDJSON_PATH_INCLUDE "rapidjson/rapidjson.h" "${RAPIDJSON_PATH}/include")
 

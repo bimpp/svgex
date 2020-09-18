@@ -1,4 +1,4 @@
-set(SVGPP_PATH "${BIMSVG_PATH_EXTERNALS}/svgpp")
+set(SVGPP_PATH "${BIMPP_SVGEX_PATH_EXTERNALS}/svgpp")
 
 find_path(SVGPP_PATH_INCLUDE "svgpp/svgpp.hpp" "${SVGPP_PATH}/include")
 

@@ -1,4 +1,4 @@
-set(RAPIDXMLNS_PATH "${BIMSVG_PATH_EXTERNALS}/rapidxml_ns")
+set(RAPIDXMLNS_PATH "${BIMPP_SVGEX_PATH_EXTERNALS}/rapidxml_ns")
 
 find_path(RAPIDXMLNS_PATH_INCLUDE "rapidxml_ns.hpp" "${RAPIDXMLNS_PATH}")
 

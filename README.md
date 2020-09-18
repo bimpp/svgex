@@ -1,9 +1,13 @@
-# BIMSVG
+# SVGEX
+
+这是只有一个头文件的项目。对SVG继续了扩展。
 
 ## 用途
 
 * 定义户型数据
 * 将[户型识别](https://bimpp.cn/docs/planreader)的`svg`结果转换为户型数据
+* 算法：
+  * 从离散的墙数据获取区域边界
 
 ## [使用方法](docs/usage.md)
 
