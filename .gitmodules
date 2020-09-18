@@ -1,9 +1,9 @@
-[submodule "externals/rapidxml_ns"]
-	path = externals/rapidxml_ns
-	url = https://gitee.com/bimpp/rapidxml_ns.git
 [submodule "externals/svgpp"]
 	path = externals/svgpp
-	url = https://gitee.com/bimpp/svgpp.git
+	url = https://github.com/svgpp/svgpp.git
+[submodule "externals/rapidxml_ns"]
+	path = externals/rapidxml_ns
+	url = https://github.com/svgpp/rapidxml_ns.git
 [submodule "externals/rapidjson"]
 	path = externals/rapidjson
-	url = https://gitee.com/bimpp/rapidjson.git
+	url = https://github.com/Tencent/rapidjson.git
