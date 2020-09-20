@@ -6,9 +6,11 @@ add_executable(demo ${CODE_FILE_LIST})
 
 target_include_directories(demo PRIVATE
     ${Boost_INCLUDE_DIR}
-    ${BIMPP_SVGEX_PATH_OUTPUT_INC}
+    ${RAPIDXMLNS_PATH_INCLUDE}
+    ${SVGPP_PATH_INCLUDE}
+    ${RAPIDJSON_PATH_INCLUDE}
+    ${BIMPPPLAN2D_PATH_INCLUDE}
+    ${BIMPP_SVGEX_PATH_INCLUDE}
     )
 
 set_target_properties(demo PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIMPP_SVGEX_PATH_OUTPUT_BIN})
-
-add_dependencies(demo PACKAGE)
