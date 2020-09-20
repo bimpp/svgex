@@ -4,6 +4,11 @@ set(CODE_FILE_LIST
     )
 add_executable(demo ${CODE_FILE_LIST})
 
-target_include_directories(demo PRIVATE ${BIMPP_SVGEX_PATH_INCLUDE_LIST})
+target_include_directories(demo PRIVATE
+    ${Boost_INCLUDE_DIR}
+    ${BIMPP_SVGEX_PATH_OUTPUT_INC}
+    )
 
 set_target_properties(demo PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIMPP_SVGEX_PATH_OUTPUT_BIN})
+
+add_dependencies(demo PACKAGE)

@@ -17,6 +17,7 @@ set(BIMPP_SVGEX_PATH_DOCS ${CMAKE_SOURCE_DIR}/docs)
 set(BIMPP_SVGEX_PATH_INCLUDE ${CMAKE_SOURCE_DIR}/include)
 set(BIMPP_SVGEX_PATH_SRC ${CMAKE_SOURCE_DIR}/src)
 set(BIMPP_SVGEX_PATH_OUTPUT ${CMAKE_SOURCE_DIR}/output)
+set(BIMPP_SVGEX_PATH_OUTPUT_INC ${BIMPP_SVGEX_PATH_OUTPUT}/include)
 set(BIMPP_SVGEX_PATH_OUTPUT_BIN ${BIMPP_SVGEX_PATH_OUTPUT}/bin)
 set(BIMPP_SVGEX_PATH_OUTPUT_LIB ${BIMPP_SVGEX_PATH_OUTPUT}/lib)
 
@@ -25,18 +26,48 @@ find_package(RapidXMLNS REQUIRED)
 find_package(SVGPP REQUIRED)
 find_package(RapidJSON REQUIRED)
 
-set(BIMPP_SVGEX_PATH_INCLUDE_LIST
-    ${Boost_INCLUDE_DIR}
-    ${RAPIDXMLNS_PATH_INCLUDE}
-    ${SVGPP_PATH_INCLUDE}
-    ${RAPIDJSON_PATH_INCLUDE}
-    ${BIMPP_SVGEX_PATH_INCLUDE}
-    )
-
 set(BIMPP_SVGEX_PATH_SRC_FILE_LIST
     ${BIMPP_SVGEX_PATH_INCLUDE}/bimpp/svgex.hpp
     )
 
+add_custom_target(PACKAGE)
+
+set_target_properties(PACKAGE PROPERTIES FOLDER "_cmake")
+
+add_custom_command(TARGET PACKAGE
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND}
+    -D "target_directory:PATH=${BIMPP_SVGEX_PATH_OUTPUT_INC}"
+    -D "source_directory:PATH=${BIMPP_SVGEX_PATH_INCLUDE}"
+    -P "${CMAKE_SOURCE_DIR}/cmake/CopyDirectory.cmake"
+    )
+
+add_custom_command(TARGET PACKAGE
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND}
+    -D "target_directory:PATH=${BIMPP_SVGEX_PATH_OUTPUT_INC}"
+    -D "source_directory:PATH=${SVGPP_PATH_INCLUDE}"
+    -P "${CMAKE_SOURCE_DIR}/cmake/CopyDirectory.cmake"
+    )
+
+add_custom_command(TARGET PACKAGE
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND}
+    -D "target_directory:PATH=${BIMPP_SVGEX_PATH_OUTPUT_INC}"
+    -D "source_directory:PATH=${RAPIDXMLNS_PATH_INCLUDE}"
+    -D "source_file:FILE=rapidxml_ns.hpp"
+    -P "${CMAKE_SOURCE_DIR}/cmake/CopyFile.cmake"
+    )
+
+add_custom_command(TARGET PACKAGE
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND}
+    -D "target_directory:PATH=${BIMPP_SVGEX_PATH_OUTPUT_INC}"
+    -D "source_directory:PATH=${RAPIDJSON_PATH_INCLUDE}"
+    -P "${CMAKE_SOURCE_DIR}/cmake/CopyDirectory.cmake"
+    )
+
+add_subdirectory(docs)
 add_subdirectory(src)
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT demo)

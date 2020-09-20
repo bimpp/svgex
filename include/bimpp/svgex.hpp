@@ -38,11 +38,8 @@
 
 namespace bimpp
 {
-    /*!
-     * 扩展svg数据
-     */
     template<typename T = double>
-    class svgex
+    class data
     {
     public:
         /*!
@@ -65,24 +62,6 @@ namespace bimpp
             }
         };
 
-        /*!
-         * 此结构体表示下一个节点，主要用于计算闭合区域。
-         */
-        struct NextNode
-        {
-            size_t  wall_id;        ///< 墙id
-            bool    wall_inversed;  ///< 墙是否反向
-            size_t  node_id;        ///< 节点id
-            bool    used;           ///< 用于标记是否已使用
-
-            NextNode()
-                : wall_id(0)
-                , wall_inversed(false)
-                , node_id(0)
-                , used(false)
-            {}
-        };
-
         struct Wall
         {
             std::string name;
@@ -91,7 +70,8 @@ namespace bimpp
             T       thickness;
 
             Wall(size_t _start_node_id = 0, size_t _end_node_id = 0, T _thickness = 0)
-                : start_node_id(_start_node_id)
+                : name("unknown")
+                , start_node_id(_start_node_id)
                 , end_node_id(_end_node_id)
                 , thickness(_thickness)
             {
@@ -100,7 +80,7 @@ namespace bimpp
 
             bool is_valid() const
             {
-                return (start_node_id != end_node_id && thickness > 0);
+                return (start_node_id != end_node_id);
             }
         };
 
@@ -116,7 +96,7 @@ namespace bimpp
             Hole()
                 : name("unknown")
                 , kind("unknown")
-                , direction("none")
+                , direction("unknown")
                 , wall_id(0)
                 , width(0)
                 , distance(0)
@@ -134,38 +114,12 @@ namespace bimpp
         {
             std::string name;
             std::vector<size_t> wall_ids;
+            bool is_hole;
 
             Area()
                 : name("unknown")
                 , wall_ids()
-            {
-                //
-            }
-        };
-
-        struct Path
-        {
-            struct WallEx
-            {
-                size_t wall_id;
-                bool inversed;
-
-                WallEx()
-                    : wall_id(0)
-                    , inversed(false)
-                {
-                    //
-                }
-            };
-
-            size_t area_id;
-            bool inside;
-            std::vector<WallEx> walls;
-
-            Path()
-                : area_id(0)
-                , inside(false)
-                , walls()
+                , is_hole(false)
             {
                 //
             }
@@ -174,10 +128,10 @@ namespace bimpp
         struct Plan
         {
             std::string name;
-            std::map<size_t, Node> nodes;
-            std::map<size_t, Wall> walls;
-            std::map<size_t, Hole> holes;
-            std::map<size_t, Area> areas;
+            std::map<size_t, data<T>::Node> nodes;
+            std::map<size_t, data<T>::Wall> walls;
+            std::map<size_t, data<T>::Hole> holes;
+            std::map<size_t, data<T>::Area> areas;
 
             Plan()
                 : name("unknown")
@@ -202,183 +156,16 @@ namespace bimpp
                 holes.clear();
                 areas.clear();
             }
-
-            bool calculate_paths(size_t _area_id, std::vector<Path>& _paths) const
-            {
-                const typename std::map<size_t, Area>::const_iterator cit_found_area = areas.find(_area_id);
-                if (cit_found_area == areas.cend())
-                {
-                    return false;
-                }
-                std::map<size_t, std::vector<NextNode>> bim_node_2_next_nodes;
-
-                const Area& bim_area = cit_found_area->second;
-                for (const size_t wall_id : bim_area.wall_ids)
-                {
-                    const Wall& bim_wall = walls.find(wall_id)->second;
-                    NextNode bim_next_node;
-                    bim_next_node.wall_id = wall_id;
-                    bim_next_node.wall_inversed = false;
-                    bim_next_node.node_id = bim_wall.end_node_id;
-                    bim_node_2_next_nodes[bim_wall.start_node_id].push_back(bim_next_node);
-                    bim_next_node.wall_inversed = true;
-                    bim_next_node.node_id = bim_wall.start_node_id;
-                    bim_node_2_next_nodes[bim_wall.end_node_id].push_back(bim_next_node);
-                }
-
-                if (bim_node_2_next_nodes.empty())
-                {
-                    return false;
-                }
-
-                auto calculate_sin_angle_ex = [](const Node& _o, const Node& _a, const Node& _b) {
-                    Node line_a(_a.x - _o.x, _a.y - _o.y);
-                    T len_a = sqrt(line_a.x * line_a.x + line_a.y * line_a.y);
-                    if (len_a != 0)
-                    {
-                        line_a.x /= len_a;
-                        line_a.y /= len_a;
-                    }
-                    Node line_b(_b.x - _o.x, _b.y - _o.y);
-                    T len_b = sqrt(line_b.x * line_b.x + line_b.y * line_b.y);
-                    if (len_b != 0)
-                    {
-                        line_b.x /= len_b;
-                        line_b.y /= len_b;
-                    }
-                    T sin_res = line_a.x * line_b.y - line_a.y * line_b.x;
-                    T cos_res = line_a.x * line_b.x + line_a.y * line_b.y;
-                    T res = sin_res;
-                    if (cos_res < static_cast<T>(0))
-                    {
-                        if (sin_res >= static_cast<T>(0))
-                        {
-                            res = static_cast<T>(2) - res;
-                        }
-                        else
-                        {
-                            res = static_cast<T>(-2) + res;
-                        }
-                    }
-                    if (res < static_cast<T>(0))
-                    {
-                        res = static_cast<T>(4) + res;
-                    }
-                    return res;
-                };
-
-                /// compute the closed path
-                while (!bim_node_2_next_nodes.empty())
-                {
-                    Path bim_closed_path;
-                    bim_closed_path.area_id = _area_id;
-                    bool bim_path_is_closed = false;
-
-                    size_t bim_start_node_id = bim_node_2_next_nodes.cbegin()->first;
-                    size_t bim_last_node_id = bim_start_node_id;
-                    size_t bim_first_wall_start_node_id = 0;
-                    size_t bim_first_wall_end_node_id = 0;
-                    typename Path::WallEx bim_first_wall_ex;
-                    while (true)
-                    {
-                        const Node& bim_start_node = nodes.find(bim_start_node_id)->second;
-                        std::vector<NextNode>& bim_next_nodes = bim_node_2_next_nodes.find(bim_start_node_id)->second;
-                        if (bim_next_nodes.empty())
-                        {
-                            break;
-                        }
-                        if (bim_start_node_id == bim_last_node_id)
-                        {
-                            NextNode& bim_next_node = bim_next_nodes[0];
-                            bim_start_node_id = bim_next_node.node_id;
-                            bim_first_wall_ex.wall_id = bim_next_node.wall_id;
-                            bim_first_wall_ex.inversed = bim_next_node.wall_inversed;
-                        }
-                        else
-                        {
-                            const Node& bim_last_node = nodes.find(bim_last_node_id)->second;
-                            std::map<T, size_t> sin_angle_ex_2_index;
-                            for (size_t i = 0; i < bim_next_nodes.size(); ++i)
-                            {
-                                const NextNode& bim_next_node = bim_next_nodes[i];
-                                if (bim_next_node.used) continue;
-                                const Node& bim_node = nodes.find(bim_next_node.node_id)->second;
-                                T sin_angle_ex = calculate_sin_angle_ex(bim_start_node, bim_last_node, bim_node);
-                                sin_angle_ex_2_index.insert(std::make_pair<>(sin_angle_ex, i));
-                            }
-                            if (sin_angle_ex_2_index.empty())
-                            {
-                                break;
-                            }
-
-                            typename std::map<T, size_t>::const_iterator sin_angle_ex_2_index_last = sin_angle_ex_2_index.cend();
-                            --sin_angle_ex_2_index_last;
-                            NextNode& bim_next_node = bim_next_nodes[sin_angle_ex_2_index_last->second];
-                            bim_next_node.used = true;
-
-                            typename Path::WallEx wall_ex;
-                            wall_ex.wall_id = bim_next_node.wall_id;
-                            wall_ex.inversed = bim_next_node.wall_inversed;
-                            bim_closed_path.walls.push_back(wall_ex);
-
-                            if (bim_first_wall_ex.wall_id == bim_next_node.wall_id
-                                && bim_first_wall_ex.inversed == bim_next_node.wall_inversed)
-                            {
-                                bim_path_is_closed = true;
-                                break;
-                            }
-
-                            bim_last_node_id = bim_start_node_id;
-                            bim_start_node_id = bim_next_node.node_id;
-
-                            if (bim_start_node_id == bim_last_node_id)
-                            {
-                                break;
-                            }
-                        }
-                    }
-
-                    if (bim_path_is_closed)
-                    {
-                        _paths.push_back(bim_closed_path);
-                    }
-
-                    for (typename std::map<size_t, std::vector<NextNode>>::iterator it_m = bim_node_2_next_nodes.begin(); it_m != bim_node_2_next_nodes.end();)
-                    {
-                        std::vector<NextNode>& bim_next_nodes = it_m->second;
-                        for (typename std::vector<NextNode>::iterator it_v = bim_next_nodes.begin(); it_v != bim_next_nodes.end();)
-                        {
-                            if (it_v->used)
-                            {
-                                it_v = bim_next_nodes.erase(it_v);
-                            }
-                            else
-                            {
-                                ++it_v;
-                            }
-                        }
-
-                        if (it_m->second.empty())
-                        {
-                            it_m = bim_node_2_next_nodes.erase(it_m);
-                        }
-                        else
-                        {
-                            ++it_m;
-                        }
-                    }
-                }
-
-                /// decide wheather the closed path is inside or outside
-                for (Path& closed_path : _paths)
-                {
-                    //
-                }
-
-                return !_paths.empty();
-            }
         };
+    };
 
+    /*!
+     * 扩展svg数据
+     */
+    template<typename T = double>
+    class svgex
+    {
+    public:
         class BimPPContext
         {
         public:
@@ -416,7 +203,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    Node new_node;
+                    data<T>::Node new_node;
                     new_node.x = json_doc["x"].GetDouble();
                     new_node.y = json_doc["y"].GetDouble();
                     all_nodes.insert(std::make_pair<>(bim_id, new_node));
@@ -429,7 +216,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    Wall new_wall;
+                    data<T>::Wall new_wall;
                     if (json_doc.HasMember("name"))
                     {
                         new_wall.name = json_doc["name"].GetString();
@@ -447,7 +234,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    Hole new_hole;
+                    data<T>::Hole new_hole;
                     if (json_doc.HasMember("name"))
                     {
                         new_hole.name = json_doc["name"].GetString();
@@ -476,7 +263,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    Area new_area;
+                    data<T>::Area new_area;
                     if (json_doc.HasMember("name"))
                     {
                         new_area.name = json_doc["name"].GetString();
@@ -538,13 +325,13 @@ namespace bimpp
 
             void path_exit() {}
 
-            bool get_plan(Plan& _plan, bool _check = false)
+            bool get_plan(typename data<T>::Plan& _plan, bool _check = false)
             {
                 if (_check)
                 {
-                    for (const std::pair<size_t, Wall>& p_wall : all_walls)
+                    for (const std::pair<size_t, typename data<T>::Wall>& p_wall : all_walls)
                     {
-                        const Wall& bim_wall = p_wall.second;
+                        const typename data<T>::Wall& bim_wall = p_wall.second;
                         if (!bim_wall.is_valid())
                         {
                             return false;
@@ -559,9 +346,9 @@ namespace bimpp
                         }
                     }
 
-                    for (const std::pair<size_t, Hole>& p_hole : all_holes)
+                    for (const std::pair<size_t, typename data<T>::Hole>& p_hole : all_holes)
                     {
-                        const Hole& bim_hole = p_hole.second;
+                        const typename data<T>::Hole& bim_hole = p_hole.second;
                         if (!bim_hole.is_valid())
                         {
                             return false;
@@ -572,9 +359,9 @@ namespace bimpp
                         }
                     }
 
-                    for (const std::pair<size_t, Area>& p_area : all_areas)
+                    for (const std::pair<size_t, typename data<T>::Area>& p_area : all_areas)
                     {
-                        const Area& bim_area = p_area.second;
+                        const typename data<T>::Area& bim_area = p_area.second;
                         if (bim_area.wall_ids.empty())
                         {
                             return false;
@@ -599,10 +386,10 @@ namespace bimpp
 
         private:
             std::string current_bimpp;
-            std::map<size_t, Node> all_nodes;
-            std::map<size_t, Wall> all_walls;
-            std::map<size_t, Hole> all_holes;
-            std::map<size_t, Area> all_areas;
+            std::map<size_t, typename data<T>::Node> all_nodes;
+            std::map<size_t, typename data<T>::Wall> all_walls;
+            std::map<size_t, typename data<T>::Hole> all_holes;
+            std::map<size_t, typename data<T>::Area> all_areas;
         };
 
     private:
@@ -693,7 +480,7 @@ namespace bimpp
         >::type TBimPPProcessedAttributesByElement;
 
     public:
-        static bool load_from_string(std::string& _svg, Plan& _plan, std::string& _error, bool _check = false)
+        static bool load_from_string(std::string& _svg, typename data<T>::Plan& _plan, std::string& _error, bool _check = false)
         {
             try
             {
@@ -722,4 +509,233 @@ namespace bimpp
         }
     };
 
+    template<typename T = double>
+    class algorithm
+    {
+    public:
+        /*!
+         * 此结构体表示下一个节点，主要用于计算闭合区域。
+         */
+        struct NextNode
+        {
+            size_t  wall_id;        ///< 所属墙id
+            bool    wall_inversed;  ///< 所属墙是否需要反向
+            size_t  node_id;        ///< 下一个节点id
+            bool    used;           ///< 用于标记是否已使用
+
+            NextNode()
+                : wall_id(0)
+                , wall_inversed(false)
+                , node_id(0)
+                , used(false)
+            {}
+        };
+
+        struct WallEx
+        {
+            size_t id;
+            bool inversed;
+
+            WallEx()
+                : id(0)
+                , inversed(false)
+            {
+                //
+            }
+        };
+
+        /*!
+         * A path represents all closed edges of an area
+         */
+        struct Path
+        {
+            size_t area_id;             ///< Belong to an area
+            bool inside;
+            std::vector<WallEx> walls;
+
+            Path()
+                : area_id(0)
+                , inside(false)
+                , walls()
+            {
+                //
+            }
+        };
+
+    public:
+        static bool calculate_paths(const typename bimpp::data<T>::Plan& _plan, size_t _area_id, std::vector<Path>& _paths)
+        {
+            const typename std::map<size_t, data<T>::Area>::const_iterator cit_found_area = _plan.areas.find(_area_id);
+            if (cit_found_area == _plan.areas.cend())
+            {
+                return false;
+            }
+            std::map<size_t, std::vector<NextNode>> bim_node_2_next_nodes;
+
+            const typename data<T>::Area& bim_area = cit_found_area->second;
+            for (const size_t wall_id : bim_area.wall_ids)
+            {
+                const data<T>::Wall& bim_wall = _plan.walls.find(wall_id)->second;
+                NextNode bim_next_node;
+                bim_next_node.wall_id = wall_id;
+                bim_next_node.wall_inversed = false;
+                bim_next_node.node_id = bim_wall.end_node_id;
+                bim_node_2_next_nodes[bim_wall.start_node_id].push_back(bim_next_node);
+                bim_next_node.wall_inversed = true;
+                bim_next_node.node_id = bim_wall.start_node_id;
+                bim_node_2_next_nodes[bim_wall.end_node_id].push_back(bim_next_node);
+            }
+
+            if (bim_node_2_next_nodes.empty())
+            {
+                return false;
+            }
+
+            auto calculate_sin_angle_ex = [](const data<T>::Node& _o, const data<T>::Node& _a, const data<T>::Node& _b) {
+                typename data<T>::Node line_a(_a.x - _o.x, _a.y - _o.y);
+                T len_a = sqrt(line_a.x * line_a.x + line_a.y * line_a.y);
+                if (len_a != 0)
+                {
+                    line_a.x /= len_a;
+                    line_a.y /= len_a;
+                }
+                typename data<T>::Node line_b(_b.x - _o.x, _b.y - _o.y);
+                T len_b = sqrt(line_b.x * line_b.x + line_b.y * line_b.y);
+                if (len_b != 0)
+                {
+                    line_b.x /= len_b;
+                    line_b.y /= len_b;
+                }
+                T sin_res = line_a.x * line_b.y - line_a.y * line_b.x;
+                T cos_res = line_a.x * line_b.x + line_a.y * line_b.y;
+                T res = sin_res;
+                if (cos_res < static_cast<T>(0))
+                {
+                    if (sin_res >= static_cast<T>(0))
+                    {
+                        res = static_cast<T>(2) - res;
+                    }
+                    else
+                    {
+                        res = static_cast<T>(-2) + res;
+                    }
+                }
+                if (res < static_cast<T>(0))
+                {
+                    res = static_cast<T>(4) + res;
+                }
+                return res;
+            };
+
+            /// compute the closed path
+            while (!bim_node_2_next_nodes.empty())
+            {
+                Path bim_closed_path;
+                bim_closed_path.area_id = _area_id;
+                bool bim_path_is_closed = false;
+
+                size_t bim_start_node_id = bim_node_2_next_nodes.cbegin()->first;
+                size_t bim_last_node_id = bim_start_node_id;
+                size_t bim_first_wall_start_node_id = 0;
+                size_t bim_first_wall_end_node_id = 0;
+                WallEx bim_first_wall_ex;
+                while (true)
+                {
+                    const typename data<T>::Node& bim_start_node = _plan.nodes.find(bim_start_node_id)->second;
+                    std::vector<NextNode>& bim_next_nodes = bim_node_2_next_nodes.find(bim_start_node_id)->second;
+                    if (bim_next_nodes.empty())
+                    {
+                        break;
+                    }
+                    if (bim_start_node_id == bim_last_node_id)
+                    {
+                        NextNode& bim_next_node = bim_next_nodes[0];
+                        bim_start_node_id = bim_next_node.node_id;
+                        bim_first_wall_ex.id = bim_next_node.wall_id;
+                        bim_first_wall_ex.inversed = bim_next_node.wall_inversed;
+                    }
+                    else
+                    {
+                        const typename data<T>::Node& bim_last_node = _plan.nodes.find(bim_last_node_id)->second;
+                        std::map<T, size_t> sin_angle_ex_2_index;
+                        for (size_t i = 0; i < bim_next_nodes.size(); ++i)
+                        {
+                            const NextNode& bim_next_node = bim_next_nodes[i];
+                            if (bim_next_node.used) continue;
+                            const data<T>::Node& bim_node = _plan.nodes.find(bim_next_node.node_id)->second;
+                            T sin_angle_ex = calculate_sin_angle_ex(bim_start_node, bim_last_node, bim_node);
+                            sin_angle_ex_2_index.insert(std::make_pair<>(sin_angle_ex, i));
+                        }
+                        if (sin_angle_ex_2_index.empty())
+                        {
+                            break;
+                        }
+
+                        typename std::map<T, size_t>::const_iterator sin_angle_ex_2_index_last = sin_angle_ex_2_index.cend();
+                        --sin_angle_ex_2_index_last;
+                        NextNode& bim_next_node = bim_next_nodes[sin_angle_ex_2_index_last->second];
+                        bim_next_node.used = true;
+
+                        WallEx wall_ex;
+                        wall_ex.id = bim_next_node.wall_id;
+                        wall_ex.inversed = bim_next_node.wall_inversed;
+                        bim_closed_path.walls.push_back(wall_ex);
+
+                        if (bim_first_wall_ex.id == bim_next_node.wall_id
+                            && bim_first_wall_ex.inversed == bim_next_node.wall_inversed)
+                        {
+                            bim_path_is_closed = true;
+                            break;
+                        }
+
+                        bim_last_node_id = bim_start_node_id;
+                        bim_start_node_id = bim_next_node.node_id;
+
+                        if (bim_start_node_id == bim_last_node_id)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                if (bim_path_is_closed)
+                {
+                    _paths.push_back(bim_closed_path);
+                }
+
+                for (typename std::map<size_t, std::vector<NextNode>>::iterator it_m = bim_node_2_next_nodes.begin(); it_m != bim_node_2_next_nodes.end();)
+                {
+                    std::vector<NextNode>& bim_next_nodes = it_m->second;
+                    for (typename std::vector<NextNode>::iterator it_v = bim_next_nodes.begin(); it_v != bim_next_nodes.end();)
+                    {
+                        if (it_v->used)
+                        {
+                            it_v = bim_next_nodes.erase(it_v);
+                        }
+                        else
+                        {
+                            ++it_v;
+                        }
+                    }
+
+                    if (it_m->second.empty())
+                    {
+                        it_m = bim_node_2_next_nodes.erase(it_m);
+                    }
+                    else
+                    {
+                        ++it_m;
+                    }
+                }
+            }
+
+            /// decide wheather the closed path is inside or outside
+            for (Path& closed_path : _paths)
+            {
+                //
+            }
+
+            return !_paths.empty();
+        }
+    };
 }

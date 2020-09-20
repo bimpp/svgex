@@ -22,10 +22,13 @@
  */
 #include <bimpp/svgex.hpp>
 
+#include <boost/polygon/polygon.hpp>
+
 #include <fstream>
 
 int main(int argc, char* argv[])
 {
+
     if (argc != 2)
     {
         return 1;
@@ -41,7 +44,7 @@ int main(int argc, char* argv[])
     std::string svg_context((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
     // parse the svg to the bim
-    bimpp::svgex<>::Plan bim_plan;
+    bimpp::data<>::Plan bim_plan;
     std::string error_message;
     if (!bimpp::svgex<>::load_from_string(svg_context, bim_plan, error_message, true))
     {
@@ -49,37 +52,37 @@ int main(int argc, char* argv[])
     }
 
     bim_plan.reset();
-    bim_plan.nodes.insert(std::make_pair<>(0, bimpp::svgex<>::Node(0.0, 0.0)));
-    bim_plan.nodes.insert(std::make_pair<>(1, bimpp::svgex<>::Node(20.0, 0.0)));
-    bim_plan.nodes.insert(std::make_pair<>(2, bimpp::svgex<>::Node(20.0, 20.0)));
-    bim_plan.nodes.insert(std::make_pair<>(3, bimpp::svgex<>::Node(0.0, 20.0)));
-    bim_plan.nodes.insert(std::make_pair<>(4, bimpp::svgex<>::Node(10.0, 0.0)));
-    bim_plan.nodes.insert(std::make_pair<>(5, bimpp::svgex<>::Node(10.0, 10.0)));
-    bim_plan.nodes.insert(std::make_pair<>(6, bimpp::svgex<>::Node(10.0, -10.0)));
-    bim_plan.nodes.insert(std::make_pair<>(7, bimpp::svgex<>::Node(10.0, -20.0)));
-    bim_plan.nodes.insert(std::make_pair<>(8, bimpp::svgex<>::Node(0.0, -20.0)));
-    bim_plan.nodes.insert(std::make_pair<>(9, bimpp::svgex<>::Node(0.0, -10.0)));
-    bim_plan.nodes.insert(std::make_pair<>(10, bimpp::svgex<>::Node(-10.0, 0.0)));
-    bim_plan.nodes.insert(std::make_pair<>(11, bimpp::svgex<>::Node(-10.0, 10.0)));
-    bim_plan.walls.insert(std::make_pair<>(0, bimpp::svgex<>::Wall(0, 4)));
-    bim_plan.walls.insert(std::make_pair<>(1, bimpp::svgex<>::Wall(4, 5)));
-    bim_plan.walls.insert(std::make_pair<>(2, bimpp::svgex<>::Wall(4, 1)));
-    bim_plan.walls.insert(std::make_pair<>(3, bimpp::svgex<>::Wall(1, 2)));
-    bim_plan.walls.insert(std::make_pair<>(4, bimpp::svgex<>::Wall(2, 3)));
-    bim_plan.walls.insert(std::make_pair<>(5, bimpp::svgex<>::Wall(3, 0)));
-    bim_plan.walls.insert(std::make_pair<>(6, bimpp::svgex<>::Wall(4, 6)));
-    bim_plan.walls.insert(std::make_pair<>(7, bimpp::svgex<>::Wall(6, 7)));
-    bim_plan.walls.insert(std::make_pair<>(8, bimpp::svgex<>::Wall(7, 8)));
-    bim_plan.walls.insert(std::make_pair<>(9, bimpp::svgex<>::Wall(8, 9)));
-    bim_plan.walls.insert(std::make_pair<>(10, bimpp::svgex<>::Wall(9, 6)));
-    bim_plan.walls.insert(std::make_pair<>(11, bimpp::svgex<>::Wall(10, 11)));
-    bimpp::svgex<>::Area bim_area;
+    bim_plan.nodes.insert(std::make_pair<>(0, bimpp::data<>::Node(0.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(1, bimpp::data<>::Node(20.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(2, bimpp::data<>::Node(20.0, 20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(3, bimpp::data<>::Node(0.0, 20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(4, bimpp::data<>::Node(10.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(5, bimpp::data<>::Node(10.0, 10.0)));
+    bim_plan.nodes.insert(std::make_pair<>(6, bimpp::data<>::Node(10.0, -10.0)));
+    bim_plan.nodes.insert(std::make_pair<>(7, bimpp::data<>::Node(10.0, -20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(8, bimpp::data<>::Node(0.0, -20.0)));
+    bim_plan.nodes.insert(std::make_pair<>(9, bimpp::data<>::Node(0.0, -10.0)));
+    bim_plan.nodes.insert(std::make_pair<>(10, bimpp::data<>::Node(-10.0, 0.0)));
+    bim_plan.nodes.insert(std::make_pair<>(11, bimpp::data<>::Node(-10.0, 10.0)));
+    bim_plan.walls.insert(std::make_pair<>(0, bimpp::data<>::Wall(0, 4)));
+    bim_plan.walls.insert(std::make_pair<>(1, bimpp::data<>::Wall(4, 5)));
+    bim_plan.walls.insert(std::make_pair<>(2, bimpp::data<>::Wall(4, 1)));
+    bim_plan.walls.insert(std::make_pair<>(3, bimpp::data<>::Wall(1, 2)));
+    bim_plan.walls.insert(std::make_pair<>(4, bimpp::data<>::Wall(2, 3)));
+    bim_plan.walls.insert(std::make_pair<>(5, bimpp::data<>::Wall(3, 0)));
+    bim_plan.walls.insert(std::make_pair<>(6, bimpp::data<>::Wall(4, 6)));
+    bim_plan.walls.insert(std::make_pair<>(7, bimpp::data<>::Wall(6, 7)));
+    bim_plan.walls.insert(std::make_pair<>(8, bimpp::data<>::Wall(7, 8)));
+    bim_plan.walls.insert(std::make_pair<>(9, bimpp::data<>::Wall(8, 9)));
+    bim_plan.walls.insert(std::make_pair<>(10, bimpp::data<>::Wall(9, 6)));
+    bim_plan.walls.insert(std::make_pair<>(11, bimpp::data<>::Wall(10, 11)));
+    bimpp::data<>::Area bim_area;
     bim_area.wall_ids = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 };
-    bim_plan.areas.insert(std::make_pair<>(0, bim_area));
+    bim_plan.areas.insert(std::make_pair<>(4, bim_area));
 
     // get the sorted nodes
-    std::vector<bimpp::svgex<>::Path> bim_paths;
-    if (!bim_plan.calculate_paths(4, bim_paths))
+    std::vector<bimpp::algorithm<>::Path> bim_paths;
+    if (!bimpp::algorithm<>::calculate_paths(bim_plan, 4, bim_paths))
     {
         return 1;
     }
