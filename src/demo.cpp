@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 
     // get the sorted nodes
     bimpp::plan2d::algorithm<>::path_vector bim_paths;
-    if (!bimpp::plan2d::algorithm<>::calculatePaths(bim_house, 4, bim_paths))
+    if (!bimpp::plan2d::algorithm<>::calculatePaths(bim_house, bim_paths))
     {
         return 1;
     }
