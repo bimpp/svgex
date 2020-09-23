@@ -60,7 +60,7 @@ namespace bimpp
             typedef typename std::pair<size_t, room_type>   room_pair;
             typedef typename plan2d::house<TConstant>       house_type;
 
-        public:
+        private:
             class BimPPContext
             {
             public:
@@ -281,7 +281,6 @@ namespace bimpp
                 room_map    all_rooms;
             };
 
-        private:
             typedef rapidxml_ns::xml_node<> const* xml_element_t;
 
             struct BimPPErrorPolicy : svgpp::policy::error::raise_exception<BimPPContext>
