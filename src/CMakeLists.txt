@@ -1,10 +1,10 @@
 set(CODE_FILE_LIST
     ${BIMPP_SVGEX_PATH_SRC_FILE_LIST}
-    demo.cpp
+    svgex.cpp
     )
-add_executable(demo ${CODE_FILE_LIST})
+add_executable(svgex ${CODE_FILE_LIST})
 
-target_include_directories(demo PRIVATE
+target_include_directories(svgex PRIVATE
     ${Boost_INCLUDE_DIR}
     ${RAPIDXMLNS_PATH_INCLUDE}
     ${SVGPP_PATH_INCLUDE}
@@ -13,4 +13,4 @@ target_include_directories(demo PRIVATE
     ${BIMPP_SVGEX_PATH_INCLUDE}
     )
 
-set_target_properties(demo PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIMPP_SVGEX_PATH_OUTPUT_BIN})
+set_target_properties(svgex PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIMPP_SVGEX_PATH_OUTPUT_BIN})
