@@ -39,9 +39,25 @@
 
 namespace bimpp
 {
-    template<typename T = double>
+    template<typename TConstant = plan2d::constant<>>
     class svgex
     {
+    public:
+        typedef typename TConstant::precision_type      precision_type;
+        typedef typename plan2d::node<TConstant>        node_type;
+        typedef typename std::map<size_t, node_type>    node_map;
+        typedef typename std::pair<size_t, node_type>   node_pair;
+        typedef typename plan2d::wall<TConstant>        wall_type;
+        typedef typename std::map<size_t, wall_type>    wall_map;
+        typedef typename std::pair<size_t, wall_type>   wall_pair;
+        typedef typename plan2d::hole<TConstant>        hole_type;
+        typedef typename std::map<size_t, hole_type>    hole_map;
+        typedef typename std::pair<size_t, hole_type>   hole_pair;
+        typedef typename plan2d::room<TConstant>        room_type;
+        typedef typename std::map<size_t, room_type>    room_map;
+        typedef typename std::pair<size_t, room_type>   room_pair;
+        typedef typename plan2d::house<TConstant>       house_type;
+
     public:
         class BimPPContext
         {
@@ -80,7 +96,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    plan2d::node<T> new_node(static_cast<T>(json_doc["x"].GetDouble()), static_cast<T>(json_doc["y"].GetDouble()));
+                    node_type new_node(static_cast<precision_type>(json_doc["x"].GetDouble()), static_cast<precision_type>(json_doc["y"].GetDouble()));
                     all_nodes.insert(std::make_pair<>(bim_id, new_node));
                 }
                 else if (json_type == "wall")
@@ -91,7 +107,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    plan2d::wall<T> new_wall;
+                    wall_type new_wall;
                     if (json_doc.HasMember("kind"))
                     {
                         new_wall.kind = json_doc["kind"].GetString();
@@ -109,7 +125,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    plan2d::hole<T> new_hole;
+                    hole_type new_hole;
                     if (json_doc.HasMember("kind"))
                     {
                         new_hole.kind = json_doc["kind"].GetString();
@@ -134,7 +150,7 @@ namespace bimpp
                     {
                         return;
                     }
-                    plan2d::room<T> new_room;
+                    room_type new_room;
                     if (json_doc.HasMember("kind"))
                     {
                         new_room.kind = json_doc["kind"].GetString();
@@ -196,13 +212,13 @@ namespace bimpp
 
             void path_exit() {}
 
-            bool getHouse(typename plan2d::house<T>& _house, bool _check = false)
+            bool getHouse(house_type& _house, bool _check = false)
             {
                 if (_check)
                 {
-                    for (const std::pair<size_t, typename plan2d::wall<T>>& p_wall : all_walls)
+                    for (const std::pair<size_t, wall_type>& p_wall : all_walls)
                     {
-                        const typename plan2d::wall<T>& bim_wall = p_wall.second;
+                        const wall_type& bim_wall = p_wall.second;
                         if (!bim_wall.isValid())
                         {
                             return false;
@@ -217,9 +233,9 @@ namespace bimpp
                         }
                     }
 
-                    for (const std::pair<size_t, typename plan2d::hole<T>>& p_hole : all_holes)
+                    for (const std::pair<size_t, hole_type>& p_hole : all_holes)
                     {
-                        const typename plan2d::hole<T>& bim_hole = p_hole.second;
+                        const hole_type& bim_hole = p_hole.second;
                         if (!bim_hole.isValid())
                         {
                             return false;
@@ -230,9 +246,9 @@ namespace bimpp
                         }
                     }
 
-                    for (const std::pair<size_t, typename plan2d::room<T>>& p_room : all_rooms)
+                    for (const std::pair<size_t, room_type>& p_room : all_rooms)
                     {
-                        const typename plan2d::room<T>& bim_room = p_room.second;
+                        const room_type& bim_room = p_room.second;
                         if (bim_room.wall_ids.empty())
                         {
                             return false;
@@ -257,10 +273,10 @@ namespace bimpp
 
         private:
             std::string current_bimpp;
-            std::map<size_t, typename plan2d::node<T>> all_nodes;
-            std::map<size_t, typename plan2d::wall<T>> all_walls;
-            std::map<size_t, typename plan2d::hole<T>> all_holes;
-            std::map<size_t, typename plan2d::room<T>> all_rooms;
+            node_map    all_nodes;
+            wall_map    all_walls;
+            hole_map    all_holes;
+            room_map    all_rooms;
         };
 
     private:
@@ -351,7 +367,7 @@ namespace bimpp
         >::type TBimPPProcessedAttributesByElement;
 
     public:
-        static bool loadFromString(std::string& _svg, typename plan2d::house<T>& _house, std::string& _error, bool _check = false)
+        static bool loadFromString(std::string& _svg, house_type& _house, std::string& _error, bool _check = false)
         {
             try
             {

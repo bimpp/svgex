@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     std::string svg_context((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
     // parse the svg to the bim
-    bimpp::plan2d::house<> bim_house;
+    bimpp::svgex<>::house_type bim_house;
     std::string error_message;
     if (!bimpp::svgex<>::loadFromString(svg_context, bim_house, error_message, true))
     {
@@ -52,8 +52,8 @@ int main(int argc, char* argv[])
     }
 
     // get the sorted nodes
-    bimpp::plan2d::algorithm<>::path_vector bim_paths;
-    if (!bimpp::plan2d::algorithm<>::calculatePaths(bim_house, bim_paths))
+    bimpp::plan2d::algorithm<>::room_ex_vector bim_room_exs;
+    if (!bimpp::plan2d::algorithm<>::computeRoomExs(bim_house, bim_room_exs))
     {
         return 1;
     }
