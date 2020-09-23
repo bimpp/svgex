@@ -39,360 +39,363 @@
 
 namespace bimpp
 {
-    template<typename TConstant = plan2d::constant<>>
-    class svgex
+    namespace svgex
     {
-    public:
-        typedef typename TConstant::precision_type      precision_type;
-        typedef typename plan2d::node<TConstant>        node_type;
-        typedef typename std::map<size_t, node_type>    node_map;
-        typedef typename std::pair<size_t, node_type>   node_pair;
-        typedef typename plan2d::wall<TConstant>        wall_type;
-        typedef typename std::map<size_t, wall_type>    wall_map;
-        typedef typename std::pair<size_t, wall_type>   wall_pair;
-        typedef typename plan2d::hole<TConstant>        hole_type;
-        typedef typename std::map<size_t, hole_type>    hole_map;
-        typedef typename std::pair<size_t, hole_type>   hole_pair;
-        typedef typename plan2d::room<TConstant>        room_type;
-        typedef typename std::map<size_t, room_type>    room_map;
-        typedef typename std::pair<size_t, room_type>   room_pair;
-        typedef typename plan2d::house<TConstant>       house_type;
-
-    public:
-        class BimPPContext
+        template<typename TConstant = plan2d::constant<>>
+        class loader
         {
         public:
-            void on_enter_element(svgpp::tag::element::any _any) {}
+            typedef typename TConstant::precision_type      precision_type;
+            typedef typename plan2d::node<TConstant>        node_type;
+            typedef typename std::map<size_t, node_type>    node_map;
+            typedef typename std::pair<size_t, node_type>   node_pair;
+            typedef typename plan2d::wall<TConstant>        wall_type;
+            typedef typename std::map<size_t, wall_type>    wall_map;
+            typedef typename std::pair<size_t, wall_type>   wall_pair;
+            typedef typename plan2d::hole<TConstant>        hole_type;
+            typedef typename std::map<size_t, hole_type>    hole_map;
+            typedef typename std::pair<size_t, hole_type>   hole_pair;
+            typedef typename plan2d::room<TConstant>        room_type;
+            typedef typename std::map<size_t, room_type>    room_map;
+            typedef typename std::pair<size_t, room_type>   room_pair;
+            typedef typename plan2d::house<TConstant>       house_type;
 
-            void on_exit_element()
+        public:
+            class BimPPContext
             {
-                if (current_bimpp.empty())
-                {
-                    return;
-                }
+            public:
+                void on_enter_element(svgpp::tag::element::any _any) {}
 
-                const std::string bimpp_data = current_bimpp;
-                current_bimpp.clear();
-
-                rapidjson::Document json_doc;
-                json_doc.Parse(bimpp_data.c_str());
-                if (!json_doc.HasMember("type")
-                    || !json_doc.HasMember("id"))
+                void on_exit_element()
                 {
-                    return;
-                }
-                const rapidjson::Value& json_type = json_doc["type"];
-                const rapidjson::Value& json_id = json_doc["id"];
-                if (!json_type.IsString()
-                    || !json_id.IsUint64())
-                {
-                    return;
-                }
-                const size_t bim_id = json_id.GetUint64();
-                if (json_type == "node")
-                {
-                    if (!json_doc.HasMember("x")
-                        || !json_doc.HasMember("y"))
+                    if (current_bimpp.empty())
                     {
                         return;
                     }
-                    node_type new_node(static_cast<precision_type>(json_doc["x"].GetDouble()), static_cast<precision_type>(json_doc["y"].GetDouble()));
-                    all_nodes.insert(std::make_pair<>(bim_id, new_node));
-                }
-                else if (json_type == "wall")
-                {
-                    if (!json_doc.HasMember("start-node-id")
-                        || !json_doc.HasMember("end-node-id")
-                        || !json_doc.HasMember("thickness"))
+
+                    const std::string bimpp_data = current_bimpp;
+                    current_bimpp.clear();
+
+                    rapidjson::Document json_doc;
+                    json_doc.Parse(bimpp_data.c_str());
+                    if (!json_doc.HasMember("type")
+                        || !json_doc.HasMember("id"))
                     {
                         return;
                     }
-                    wall_type new_wall;
-                    if (json_doc.HasMember("kind"))
-                    {
-                        new_wall.kind = json_doc["kind"].GetString();
-                    }
-                    new_wall.start_node_id = json_doc["start-node-id"].GetUint64();
-                    new_wall.end_node_id = json_doc["end-node-id"].GetUint64();
-                    new_wall.thickness = json_doc["thickness"].GetDouble();
-                    all_walls.insert(std::make_pair<>(bim_id, new_wall));
-                }
-                else if (json_type == "hole")
-                {
-                    if (!json_doc.HasMember("wall-id")
-                        || !json_doc.HasMember("distance")
-                        || !json_doc.HasMember("width"))
+                    const rapidjson::Value& json_type = json_doc["type"];
+                    const rapidjson::Value& json_id = json_doc["id"];
+                    if (!json_type.IsString()
+                        || !json_id.IsUint64())
                     {
                         return;
                     }
-                    hole_type new_hole;
-                    if (json_doc.HasMember("kind"))
+                    const size_t bim_id = json_id.GetUint64();
+                    if (json_type == "node")
                     {
-                        new_hole.kind = json_doc["kind"].GetString();
+                        if (!json_doc.HasMember("x")
+                            || !json_doc.HasMember("y"))
+                        {
+                            return;
+                        }
+                        node_type new_node(static_cast<precision_type>(json_doc["x"].GetDouble()), static_cast<precision_type>(json_doc["y"].GetDouble()));
+                        all_nodes.insert(std::make_pair<>(bim_id, new_node));
                     }
-                    if (json_doc.HasMember("direction"))
+                    else if (json_type == "wall")
                     {
-                        new_hole.direction = json_doc["direction"].GetString();
+                        if (!json_doc.HasMember("start-node-id")
+                            || !json_doc.HasMember("end-node-id")
+                            || !json_doc.HasMember("thickness"))
+                        {
+                            return;
+                        }
+                        wall_type new_wall;
+                        if (json_doc.HasMember("kind"))
+                        {
+                            new_wall.kind = json_doc["kind"].GetString();
+                        }
+                        new_wall.start_node_id = json_doc["start-node-id"].GetUint64();
+                        new_wall.end_node_id = json_doc["end-node-id"].GetUint64();
+                        new_wall.thickness = json_doc["thickness"].GetDouble();
+                        all_walls.insert(std::make_pair<>(bim_id, new_wall));
                     }
-                    new_hole.wall_id = json_doc["wall-id"].GetUint64();
-                    new_hole.distance = json_doc["distance"].GetDouble();
-                    new_hole.width = json_doc["width"].GetDouble();
-                    all_holes.insert(std::make_pair<>(bim_id, new_hole));
+                    else if (json_type == "hole")
+                    {
+                        if (!json_doc.HasMember("wall-id")
+                            || !json_doc.HasMember("distance")
+                            || !json_doc.HasMember("width"))
+                        {
+                            return;
+                        }
+                        hole_type new_hole;
+                        if (json_doc.HasMember("kind"))
+                        {
+                            new_hole.kind = json_doc["kind"].GetString();
+                        }
+                        if (json_doc.HasMember("direction"))
+                        {
+                            new_hole.direction = json_doc["direction"].GetString();
+                        }
+                        new_hole.wall_id = json_doc["wall-id"].GetUint64();
+                        new_hole.distance = json_doc["distance"].GetDouble();
+                        new_hole.width = json_doc["width"].GetDouble();
+                        all_holes.insert(std::make_pair<>(bim_id, new_hole));
+                    }
+                    else if (json_type == "room")
+                    {
+                        if (!json_doc.HasMember("wall-ids"))
+                        {
+                            return;
+                        }
+                        const rapidjson::Value& json_wall_ids = json_doc["wall-ids"];
+                        if (!json_wall_ids.IsArray())
+                        {
+                            return;
+                        }
+                        room_type new_room;
+                        if (json_doc.HasMember("kind"))
+                        {
+                            new_room.kind = json_doc["kind"].GetString();
+                        }
+                        for (rapidjson::Value::ConstValueIterator itr = json_wall_ids.Begin(); itr != json_wall_ids.End(); ++itr)
+                        {
+                            const size_t bim_wall_id = itr->GetUint64();
+                            // remove the repeated wall.
+                            if (std::find(new_room.wall_ids.cbegin(), new_room.wall_ids.cend(), bim_wall_id) != new_room.wall_ids.cend())
+                            {
+                                continue;
+                            }
+                            new_room.wall_ids.push_back(bim_wall_id);
+                        }
+                        if (new_room.wall_ids.empty())
+                        {
+                            return;
+                        }
+                        all_rooms.insert(std::make_pair<>(bim_id, new_room));
+                    }
                 }
-                else if (json_type == "room")
+
+                void on_bimpp(const std::string& _value)
                 {
-                    if (!json_doc.HasMember("wall-ids"))
+                    current_bimpp = _value;
+                    // use `"` to replace `'`
+                    for (char& c : current_bimpp)
                     {
-                        return;
+                        if (c != '\'') continue;
+                        c = '\"';
                     }
-                    const rapidjson::Value& json_wall_ids = json_doc["wall-ids"];
-                    if (!json_wall_ids.IsArray())
-                    {
-                        return;
-                    }
-                    room_type new_room;
-                    if (json_doc.HasMember("kind"))
-                    {
-                        new_room.kind = json_doc["kind"].GetString();
-                    }
-                    for (rapidjson::Value::ConstValueIterator itr = json_wall_ids.Begin(); itr != json_wall_ids.End(); ++itr)
-                    {
-                        const size_t bim_wall_id = itr->GetUint64();
-                        // remove the repeated wall.
-                        if (std::find(new_room.wall_ids.cbegin(), new_room.wall_ids.cend(), bim_wall_id) != new_room.wall_ids.cend())
-                        {
-                            continue;
-                        }
-                        new_room.wall_ids.push_back(bim_wall_id);
-                    }
-                    if (new_room.wall_ids.empty())
-                    {
-                        return;
-                    }
-                    all_rooms.insert(std::make_pair<>(bim_id, new_room));
                 }
-            }
 
-            void on_bimpp(const std::string& _value)
-            {
-                current_bimpp = _value;
-                // use `"` to replace `'`
-                for (char& c : current_bimpp)
+                void path_move_to(double x, double y, svgpp::tag::coordinate::absolute) {}
+
+                void path_line_to(double x, double y, svgpp::tag::coordinate::absolute) {}
+
+                void path_cubic_bezier_to(
+                    double x1, double y1,
+                    double x2, double y2,
+                    double x, double y,
+                    svgpp::tag::coordinate::absolute)
+                {}
+
+                void path_quadratic_bezier_to(
+                    double x1, double y1,
+                    double x, double y,
+                    svgpp::tag::coordinate::absolute)
+                {}
+
+                void path_elliptical_arc_to(
+                    double rx, double ry, double x_axis_rotation,
+                    bool large_arc_flag, bool sweep_flag,
+                    double x, double y,
+                    svgpp::tag::coordinate::absolute)
+                {}
+
+                void path_close_subpath() {}
+
+                void path_exit() {}
+
+                bool getHouse(house_type& _house, bool _check = false)
                 {
-                    if (c != '\'') continue;
-                    c = '\"';
-                }
-            }
-
-            void path_move_to(double x, double y, svgpp::tag::coordinate::absolute) {}
-
-            void path_line_to(double x, double y, svgpp::tag::coordinate::absolute) {}
-
-            void path_cubic_bezier_to(
-                double x1, double y1,
-                double x2, double y2,
-                double x, double y,
-                svgpp::tag::coordinate::absolute)
-            {}
-
-            void path_quadratic_bezier_to(
-                double x1, double y1,
-                double x, double y,
-                svgpp::tag::coordinate::absolute)
-            {}
-
-            void path_elliptical_arc_to(
-                double rx, double ry, double x_axis_rotation,
-                bool large_arc_flag, bool sweep_flag,
-                double x, double y,
-                svgpp::tag::coordinate::absolute)
-            {}
-
-            void path_close_subpath() {}
-
-            void path_exit() {}
-
-            bool getHouse(house_type& _house, bool _check = false)
-            {
-                if (_check)
-                {
-                    for (const std::pair<size_t, wall_type>& p_wall : all_walls)
+                    if (_check)
                     {
-                        const wall_type& bim_wall = p_wall.second;
-                        if (!bim_wall.isValid())
+                        for (const std::pair<size_t, wall_type>& p_wall : all_walls)
                         {
-                            return false;
-                        }
-                        if (all_nodes.find(bim_wall.start_node_id) == all_nodes.cend())
-                        {
-                            return false;
-                        }
-                        if (all_nodes.find(bim_wall.end_node_id) == all_nodes.cend())
-                        {
-                            return false;
-                        }
-                    }
-
-                    for (const std::pair<size_t, hole_type>& p_hole : all_holes)
-                    {
-                        const hole_type& bim_hole = p_hole.second;
-                        if (!bim_hole.isValid())
-                        {
-                            return false;
-                        }
-                        if (all_walls.find(bim_hole.wall_id) == all_walls.cend())
-                        {
-                            return false;
-                        }
-                    }
-
-                    for (const std::pair<size_t, room_type>& p_room : all_rooms)
-                    {
-                        const room_type& bim_room = p_room.second;
-                        if (bim_room.wall_ids.empty())
-                        {
-                            return false;
-                        }
-                        for (size_t wall_id : bim_room.wall_ids)
-                        {
-                            if (all_walls.find(wall_id) == all_walls.cend())
+                            const wall_type& bim_wall = p_wall.second;
+                            if (!bim_wall.isValid())
+                            {
+                                return false;
+                            }
+                            if (all_nodes.find(bim_wall.start_node_id) == all_nodes.cend())
+                            {
+                                return false;
+                            }
+                            if (all_nodes.find(bim_wall.end_node_id) == all_nodes.cend())
                             {
                                 return false;
                             }
                         }
+
+                        for (const std::pair<size_t, hole_type>& p_hole : all_holes)
+                        {
+                            const hole_type& bim_hole = p_hole.second;
+                            if (!bim_hole.isValid())
+                            {
+                                return false;
+                            }
+                            if (all_walls.find(bim_hole.wall_id) == all_walls.cend())
+                            {
+                                return false;
+                            }
+                        }
+
+                        for (const std::pair<size_t, room_type>& p_room : all_rooms)
+                        {
+                            const room_type& bim_room = p_room.second;
+                            if (bim_room.wall_ids.empty())
+                            {
+                                return false;
+                            }
+                            for (size_t wall_id : bim_room.wall_ids)
+                            {
+                                if (all_walls.find(wall_id) == all_walls.cend())
+                                {
+                                    return false;
+                                }
+                            }
+                        }
                     }
+
+                    _house.reset();
+                    _house.nodes = all_nodes;
+                    _house.walls = all_walls;
+                    _house.holes = all_holes;
+                    _house.rooms = all_rooms;
+                    return true;
                 }
 
-                _house.reset();
-                _house.nodes = all_nodes;
-                _house.walls = all_walls;
-                _house.holes = all_holes;
-                _house.rooms = all_rooms;
-                return true;
-            }
+            private:
+                std::string current_bimpp;
+                node_map    all_nodes;
+                wall_map    all_walls;
+                hole_map    all_holes;
+                room_map    all_rooms;
+            };
 
         private:
-            std::string current_bimpp;
-            node_map    all_nodes;
-            wall_map    all_walls;
-            hole_map    all_holes;
-            room_map    all_rooms;
-        };
+            typedef rapidxml_ns::xml_node<> const* xml_element_t;
 
-    private:
-        typedef rapidxml_ns::xml_node<> const* xml_element_t;
-
-        struct BimPPErrorPolicy : svgpp::policy::error::raise_exception<BimPPContext>
-        {
-            template<class XMLAttribute, class AttributeName>
-            static bool unknown_attribute(BimPPContext& _context,
-                XMLAttribute const& _attribute,
-                AttributeName const& name,
-                BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
-                svgpp::tag::source::attribute,
-                typename boost::enable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
+            struct BimPPErrorPolicy : svgpp::policy::error::raise_exception<BimPPContext>
             {
-                const std::string attribute_name = _attribute->name();
-                if (attribute_name == "bimpp")
+                template<class XMLAttribute, class AttributeName>
+                static bool unknown_attribute(BimPPContext& _context,
+                    XMLAttribute const& _attribute,
+                    AttributeName const& name,
+                    BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
+                    svgpp::tag::source::attribute,
+                    typename boost::enable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
                 {
-                    const std::string attribute_value = _attribute->value();
-                    _context.on_bimpp(attribute_value);
-                    return true;
+                    const std::string attribute_name = _attribute->name();
+                    if (attribute_name == "bimpp")
+                    {
+                        const std::string attribute_value = _attribute->value();
+                        _context.on_bimpp(attribute_value);
+                        return true;
+                    }
+                    if (namespace_id == svgpp::detail::namespace_id::svg)
+                        throw svgpp::unknown_attribute_error(name) << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(_attribute);
+                    else
+                        return true;
                 }
-                if (namespace_id == svgpp::detail::namespace_id::svg)
-                    throw svgpp::unknown_attribute_error(name) << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(_attribute);
-                else
-                    return true;
-            }
 
-            template<class XMLAttribute, class AttributeName>
-            static bool unknown_attribute(BimPPContext& _context,
-                XMLAttribute const& _attribute,
-                AttributeName const&,
-                BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
-                svgpp::tag::source::attribute,
-                typename boost::disable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
-            {
-                const std::string attribute_name = _attribute->name();
-                if (attribute_name == "bimpp")
+                template<class XMLAttribute, class AttributeName>
+                static bool unknown_attribute(BimPPContext& _context,
+                    XMLAttribute const& _attribute,
+                    AttributeName const&,
+                    BOOST_SCOPED_ENUM(svgpp::detail::namespace_id) namespace_id,
+                    svgpp::tag::source::attribute,
+                    typename boost::disable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
                 {
+                    const std::string attribute_name = _attribute->name();
+                    if (attribute_name == "bimpp")
+                    {
+                        const std::string attribute_value = _attribute->value();
+                        _context.on_bimpp(attribute_value);
+                        return true;
+                    }
                     const std::string attribute_value = _attribute->value();
-                    _context.on_bimpp(attribute_value);
-                    return true;
+                    if (namespace_id == svgpp::detail::namespace_id::svg)
+                        throw svgpp::unknown_attribute_error() << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(_attribute);
+                    else
+                        return true;
                 }
-                const std::string attribute_value = _attribute->value();
-                if (namespace_id == svgpp::detail::namespace_id::svg)
-                    throw svgpp::unknown_attribute_error() << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(_attribute);
-                else
-                    return true;
-            }
 
-            template<class XMLAttribute, class AttributeName>
-            SVGPP_NORETURN static bool unknown_attribute(BimPPContext const&,
-                XMLAttribute const& attribute,
-                AttributeName const& name,
-                svgpp::tag::source::css,
-                typename boost::enable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
-            {
-                throw svgpp::unknown_css_property_error(name) << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(attribute);
-            }
-
-            template<class XMLAttribute, class AttributeName>
-            SVGPP_NORETURN static bool unknown_attribute(BimPPContext const&,
-                XMLAttribute const& attribute,
-                AttributeName const&,
-                svgpp::tag::source::css,
-                typename boost::disable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
-            {
-                throw svgpp::unknown_css_property_error() << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(attribute);
-            }
-        };
-
-        typedef boost::mpl::set<
-            svgpp::tag::element::svg,
-            svgpp::tag::element::circle,
-            svgpp::tag::element::line,
-            svgpp::tag::element::path
-        >::type TBimPPProcessedElements;
-
-        typedef boost::mpl::set<
-            boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::cx>,
-            boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::cy>,
-            boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::r>,
-            boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::x1>,
-            boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::y1>,
-            boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::x2>,
-            boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::y2>,
-            boost::mpl::pair<svgpp::tag::element::path, svgpp::tag::attribute::d>
-        >::type TBimPPProcessedAttributesByElement;
-
-    public:
-        static bool loadFromString(std::string& _svg, house_type& _house, std::string& _error, bool _check = false)
-        {
-            try
-            {
-                BimPPContext context;
-                rapidxml_ns::xml_document<> xml_doc;
-                xml_doc.parse<0>(&_svg[0]);
-                rapidxml_ns::xml_node<>* xml_svg_element = xml_doc.first_node("svg");
-                if (!xml_svg_element)
+                template<class XMLAttribute, class AttributeName>
+                SVGPP_NORETURN static bool unknown_attribute(BimPPContext const&,
+                    XMLAttribute const& attribute,
+                    AttributeName const& name,
+                    svgpp::tag::source::css,
+                    typename boost::enable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
                 {
+                    throw svgpp::unknown_css_property_error(name) << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(attribute);
+                }
+
+                template<class XMLAttribute, class AttributeName>
+                SVGPP_NORETURN static bool unknown_attribute(BimPPContext const&,
+                    XMLAttribute const& attribute,
+                    AttributeName const&,
+                    svgpp::tag::source::css,
+                    typename boost::disable_if<typename svgpp::detail::is_char_range<AttributeName>::type>::type* = NULL)
+                {
+                    throw svgpp::unknown_css_property_error() << boost::error_info<svgpp::tag::error_info::xml_attribute, XMLAttribute>(attribute);
+                }
+            };
+
+            typedef boost::mpl::set<
+                svgpp::tag::element::svg,
+                svgpp::tag::element::circle,
+                svgpp::tag::element::line,
+                svgpp::tag::element::path
+            >::type TBimPPProcessedElements;
+
+            typedef boost::mpl::set<
+                boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::cx>,
+                boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::cy>,
+                boost::mpl::pair<svgpp::tag::element::circle, svgpp::tag::attribute::r>,
+                boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::x1>,
+                boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::y1>,
+                boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::x2>,
+                boost::mpl::pair<svgpp::tag::element::line, svgpp::tag::attribute::y2>,
+                boost::mpl::pair<svgpp::tag::element::path, svgpp::tag::attribute::d>
+            >::type TBimPPProcessedAttributesByElement;
+
+        public:
+            static bool load(std::string& _svg, house_type& _house, std::string& _error, bool _check = false)
+            {
+                try
+                {
+                    BimPPContext context;
+                    rapidxml_ns::xml_document<> xml_doc;
+                    xml_doc.parse<0>(&_svg[0]);
+                    rapidxml_ns::xml_node<>* xml_svg_element = xml_doc.first_node("svg");
+                    if (!xml_svg_element)
+                    {
+                        return false;
+                    }
+                    svgpp::document_traversal<
+                        svgpp::error_policy<BimPPErrorPolicy>,
+                        svgpp::processed_elements<TBimPPProcessedElements>,
+                        svgpp::processed_attributes<TBimPPProcessedAttributesByElement>
+                    >::load_document(xml_svg_element, context);
+                    return context.getHouse(_house, _check);
+                }
+                catch (std::exception const& e)
+                {
+                    _error = e.what();
                     return false;
                 }
-                svgpp::document_traversal<
-                    svgpp::error_policy<BimPPErrorPolicy>,
-                    svgpp::processed_elements<TBimPPProcessedElements>,
-                    svgpp::processed_attributes<TBimPPProcessedAttributesByElement>
-                >::load_document(xml_svg_element, context);
-                return context.getHouse(_house, _check);
-            }
-            catch (std::exception const& e)
-            {
-                _error = e.what();
+                _error = "unknown reason";
                 return false;
             }
-            _error = "unknown reason";
-            return false;
-        }
-    };
+        };
+    }
 }

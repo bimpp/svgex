@@ -22,12 +22,17 @@
  */
 #include <bimpp/svgex.hpp>
 
-#include <boost/polygon/polygon.hpp>
-
 #include <fstream>
+
+#if defined(WIN32) && !defined(NDEBUG)
+#include <crtdbg.h>
+#endif
 
 int main(int argc, char* argv[])
 {
+#if defined(WIN32) && !defined(NDEBUG)
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 
     if (argc != 2)
     {
@@ -44,9 +49,9 @@ int main(int argc, char* argv[])
     std::string svg_context((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
     // parse the svg to the bim
-    bimpp::svgex<>::house_type bim_house;
+    bimpp::svgex::loader<>::house_type bim_house;
     std::string error_message;
-    if (!bimpp::svgex<>::loadFromString(svg_context, bim_house, error_message, true))
+    if (!bimpp::svgex::loader<>::load(svg_context, bim_house, error_message, true))
     {
         return 1;
     }
