@@ -1,0 +1,16 @@
+version: 2
+
+submodules:
+    recursive: true
+
+sphinx:
+    configuration: docs/conf.py
+
+formats:
+    - pdf
+    - epub
+
+python:
+    version: 3.7
+    install:
+        - requirements: docs/requirements.txt
