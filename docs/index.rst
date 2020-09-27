@@ -1,6 +1,9 @@
 Welcome to SVGEX's documentation!
 ===================================
 
+* Document_
+* GitRepo_
+
 .. doxygenclass:: bimpp::svgex::loader
 
 License
@@ -31,3 +34,6 @@ License
     * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
     * OTHER DEALINGS IN THE SOFTWARE.
     */
+
+.. _Document: https://bimpp.io/docs/svgex
+.. _GitRepo: https://gitee.com/bimpp/svgex
