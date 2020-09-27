@@ -4,6 +4,17 @@ Welcome to SVGEX's documentation!
 * Document_
 * GitRepo_
 
+Features
+========
+
+* Header-Only
+* Parse the result of PlanReader_
+
+Usage
+=====
+
+It depends svgpp_ (needs boost_), rapidxml_ns_, rapidjson_, and plan2d_.
+
 .. doxygenclass:: bimpp::svgex::loader
 
 License
@@ -37,3 +48,9 @@ License
 
 .. _Document: https://bimpp.io/docs/svgex
 .. _GitRepo: https://gitee.com/bimpp/svgex
+.. _PlanReader: https://bimpp.io/docs/planreader
+.. _boost: https://www.boost.org/
+.. _rapidxml_ns: https://github.com/svgpp/rapidxml_ns
+.. _svgpp: https://github.com/svgpp/svgpp
+.. _rapidjson: https://github.com/Tencent/rapidjson
+.. _plan2d: https://gitee.com/bimpp/plan2d
