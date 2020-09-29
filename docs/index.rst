@@ -2,7 +2,7 @@ Welcome to SVGEX's documentation!
 ===================================
 
 * Document_
-* GitRepo_
+* Repository_
 
 Features
 ========
@@ -15,7 +15,28 @@ Usage
 
 It depends svgpp_ (needs boost_), rapidxml_ns_, rapidjson_, and plan2d_.
 
-.. doxygenclass:: bimpp::svgex::loader
+.. doxygenfunction:: bimpp::svgex::loader::load
+
+.. code-block:: cpp
+
+    // Load the svg file to a string `svg_context`
+    std::ifstream svg_ifs("file.svg", std::ifstream::in);
+    if (!svg_ifs.good())
+    {
+        // The svg file is invalid!
+        return;
+    }
+    std::string svg_context((std::istreambuf_iterator<char>(svg_ifs)), std::istreambuf_iterator<char>());
+
+    // Declare a house - `bim_house` and a string - `error_message`
+    bimpp::svgex::loader<>::house_type bim_house;
+    std::string error_message;
+    // Parse the svg to the bim data
+    if (!bimpp::svgex::loader<>::load(svg_context, bim_house, error_message, true))
+    {
+        // The svg context has error?
+        return;
+    }
 
 License
 =======
@@ -47,7 +68,7 @@ License
     */
 
 .. _Document: https://bimpp.io/docs/svgex
-.. _GitRepo: https://gitee.com/bimpp/svgex
+.. _Repository: https://gitee.com/bimpp/svgex
 .. _PlanReader: https://bimpp.io/docs/planreader
 .. _boost: https://www.boost.org/
 .. _rapidxml_ns: https://github.com/svgpp/rapidxml_ns

@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
     std::string svg_context((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-    // parse the svg to the bim
+    // parse the svg to the bim data
     bimpp::svgex::loader<>::house_type bim_house;
     std::string error_message;
     if (!bimpp::svgex::loader<>::load(svg_context, bim_house, error_message, true))
