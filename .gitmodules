@@ -7,3 +7,6 @@
 [submodule "externals/rapidjson"]
 	path = externals/rapidjson
 	url = https://github.com/Tencent/rapidjson.git
+[submodule "externals/plan2d"]
+	path = externals/plan2d
+	url = https://github.com/bimpp/plan2d.git
